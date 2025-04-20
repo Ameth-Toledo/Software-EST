@@ -1,0 +1,51 @@
+.nav-bar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    background-color: #003960;
+    width: 90%; 
+    border-radius: 20px 0 20px 0;
+    padding: 10px 20px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-bottom: 8px solid #032E4C; 
+}
+
+.logo {
+    height: 40px;
+}
+
+.title {
+    color: white;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 10px;
+    margin-right: auto; 
+}
+
+.btn-login {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid #032E4C; 
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #032E4C;
+    transform: scale(1.05);
+}
+
+.btn-login i {
+    font-size: 18px;
+}

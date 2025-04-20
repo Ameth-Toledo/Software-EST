@@ -1,0 +1,87 @@
+.nav-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100; 
+}
+
+.hero {
+    position: relative;
+    background-color: #EBEEFF;
+    padding: 120px 100px 60px 100px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; 
+    overflow: hidden;
+    min-height: 800px;
+    margin-top: 0; 
+}
+
+.hero-content {
+    max-width: 50%;
+    margin-top: 100px; 
+}
+
+.hero-title {
+    font-size: 5.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-login, .btn-register {
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    cursor: pointer; 
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-login {
+    background-color: #003057;
+    color: white;
+    border: none;
+}
+
+.btn-register {
+    background-color: transparent;
+    border: 1px solid #003057;
+    color: #003057;
+}
+
+.hero-image {
+    max-width: 45%;
+    align-self: center; 
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+}
+
+.wave-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+}
+
+.hero-wave {
+    width: 100%;
+    height: auto;
+}
