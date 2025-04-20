@@ -3,24 +3,24 @@
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 100; 
+    z-index: 100;
 }
 
 .hero {
     position: relative;
     background-color: #EBEEFF;
-    padding: 120px 100px 60px 100px; 
+    padding: 120px 100px 60px 100px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; 
+    align-items: flex-start;
     overflow: hidden;
     min-height: 800px;
-    margin-top: 0; 
+    margin-top: 0;
 }
 
 .hero-content {
     max-width: 50%;
-    margin-top: 100px; 
+    margin-top: 100px;
 }
 
 .hero-title {
@@ -32,23 +32,49 @@
 .hero-subtitle {
     font-size: 2rem;
     margin-bottom: 2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 4px solid #003057; 
+    width: 0;
+    animation: typing 4s steps(30) 1s forwards, blink 0.75s step-end infinite;
 }
 
+@keyframes typing {
+    0% {
+        width: 0;
+    }
+    50% {
+        width: 100%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+
 .hero-buttons {
+    position: relative;  
+    z-index: 200;  
     display: flex;
     gap: 1rem;
+    margin-top: 50px; 
 }
 
 .btn-login, .btn-register {
-    padding: 10px 24px;
+    padding: 14px 32px;
     border-radius: 4px;
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    cursor: pointer; 
     display: flex;
     align-items: center;
     gap: 8px;
+    transition: transform 0.3s ease-in-out;
 }
 
 .btn-login {
@@ -63,9 +89,14 @@
     color: #003057;
 }
 
+.btn-login:hover, .btn-register:hover {
+    transform: translateY(-8px);
+    cursor: pointer;
+}
+
 .hero-image {
     max-width: 45%;
-    align-self: center; 
+    align-self: center;
 }
 
 .hero-image img {
