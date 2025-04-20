@@ -4,11 +4,13 @@ import { Router } from '@angular/router';
 import { FooterComponent } from "../../components/footer/footer.component";
 import { CardCursosComponent } from "../../components/card-cursos/card-cursos.component";
 import { TecnologiasComponent } from "../../components/tecnologias/tecnologias.component";
+import { DeveloperCardComponent } from "../../components/developer-card/developer-card.component";
+import { GithubCardComponent } from "../../components/github-card/github-card.component";
 
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, CardCursosComponent, TecnologiasComponent],
+  imports: [HeaderComponent, FooterComponent, CardCursosComponent, TecnologiasComponent, DeveloperCardComponent, GithubCardComponent],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss'
 })

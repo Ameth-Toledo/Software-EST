@@ -203,3 +203,54 @@
     object-fit: cover;
     margin-left: 20px;
 }
+
+.coolaborativo-dev {
+    padding: 20px;
+}
+
+.title-coolaborativo {
+    font-size: 2.5rem;
+    color: #003057;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.github-img {
+    width: 80px;
+    height: auto;
+}
+
+.title-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 80px;
+}
+
+.developers {
+   padding: 40px 20px;
+}
+  
+.developers-title {
+   font-size: 2.5rem;
+   color: #003057;
+   margin-bottom: 40px;
+   text-align: center;
+}
+  
+.developers-container {
+   display: flex;
+   justify-content: center;
+   gap: 10px;
+   flex-wrap: wrap;
+}
+  

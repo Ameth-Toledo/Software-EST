@@ -60,11 +60,86 @@
             <i class="fas fa-globe"></i> Empezar ahora
         </button>
     </div>
-    <img src="assets/banner.png" alt="banner" class="banner-promo">
+    <img src="assets/banner.svg" alt="banner" class="banner-promo">
 </section>
 
 <section class="tecnologias">
     <app-tecnologias></app-tecnologias>
 </section>
+
+<section class="coolaborativo-dev">
+    <div class="title-wrapper">
+        <img src="assets/github.gif" alt="GitHub Gif" class="github-img">
+        <h1 class="title-coolaborativo">Aprende a trabajar en colaborativo en GitHub</h1>
+    </div>
+    <div class="cards-container">
+        <app-github-card user="Ameth Toledo" repoName="Api-Go"></app-github-card>
+        <app-github-card user="FabricioPRZ" repoName="FastAPI"></app-github-card>
+        <app-github-card user="JaredTorres" repoName="Frontend"></app-github-card>
+    </div>
+</section>
+
+<section class="developers">
+    <h1 class="developers-title">Conoce a los desarrolladores de EST-SOFTWARE</h1>
+    
+    <div class="developers-container">
+      <app-developer-card
+        [imageUrl]="'assets/devs/ameth.webp'"
+        [name]="'Ameth Toledo'"
+        [role]="'FullStack Developer'"
+        [techLogos]="[
+          'assets/icons/angular.svg',
+          'assets/icons/react.svg',
+          'assets/icons/python.svg',
+          'assets/icons/javascript.svg',
+          'assets/icons/go.svg',
+          'assets/icons/github-black.svg',
+          'assets/icons/linux.svg',
+          'assets/icons/java.svg',
+          'assets/icons/c.svg',
+          'assets/icons/mysql-black.svg',
+          'assets/icons/tailwind.svg'
+        ]">
+      </app-developer-card>
+  
+      <app-developer-card
+        [imageUrl]="'assets/devs/fabricio.webp'"
+        [name]="'Fabricio Perez'"
+        [role]="'FullStack Developer'"
+        [techLogos]="[
+          'assets/icons/angular.svg',
+          'assets/icons/react.svg',
+          'assets/icons/python.svg',
+          'assets/icons/javascript.svg',
+          'assets/icons/go.svg',
+          'assets/icons/github-black.svg',
+          'assets/icons/linux.svg',
+          'assets/icons/java.svg',
+          'assets/icons/c.svg',
+          'assets/icons/mysql-black.svg',
+          'assets/icons/tailwind.svg'
+        ]">
+      </app-developer-card>
+  
+      <app-developer-card
+        [imageUrl]="'assets/devs/jared.webp'"
+        [name]="'Jared Torres'"
+        [role]="'FrontEnd Developer'"
+        [techLogos]="[
+          'assets/icons/html.svg',
+          'assets/icons/css.svg',
+          'assets/icons/react.svg',
+          'assets/icons/javascript.svg',
+          'assets/icons/github-black.svg',
+          'assets/icons/linux.svg',
+          'assets/icons/java.svg',
+          'assets/icons/c.svg',
+          'assets/icons/mysql-black.svg',
+          'assets/icons/tailwind.svg',
+          'assets/icons/figma.svg'
+        ]">
+      </app-developer-card>
+    </div>
+</section>  
 
 <app-footer></app-footer>
