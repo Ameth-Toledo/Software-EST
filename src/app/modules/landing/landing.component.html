@@ -21,25 +21,50 @@
     <h1 class="cursos-title">Nuestros cursos</h1>
     <div class="courses-grid">
         <app-card-cursos
-        imageUrl="https://kinsta.com/es/wp-content/uploads/sites/8/2023/04/react-must-be-in-scope-when-using-jsx.jpg"
-        tag="Bestseller"
-        title="Desarrollo Frontend con React"
-        description="Domina React desde cero y conviértete en un desarrollador frontend de élite."
-        duration="25 horas"
-        rating="⭐⭐⭐⭐⭐ 4.9/5"
-        link="/curso/react"
-      ></app-card-cursos>
+            imageUrl="https://kinsta.com/es/wp-content/uploads/sites/8/2023/04/react-must-be-in-scope-when-using-jsx.jpg"
+            tag="Bestseller"
+            title="Desarrollo Frontend con React"
+            description="Domina React desde cero y conviértete en un desarrollador frontend de élite."
+            duration="25 horas"
+            rating="⭐⭐⭐⭐⭐ 4.9/5"
+            link="/curso/react">
+        </app-card-cursos>
       
-      <app-card-cursos
-        imageUrl="https://stream-blog-v2.imgix.net/blog/wp-content/uploads/f9547f9b9ba2dfa409118a00d2b7691d/Angular.png?auto=format&auto=compress"
-        tag="Nuevo"
-        title="Introducción a Angular"
-        description="Aprende los conceptos fundamentales de Angular y empieza a crear aplicaciones web."
-        duration="30 horas"
-        rating="⭐⭐⭐⭐ 4.5/5"
-        link="/curso/angular"
-      ></app-card-cursos>
-          </div>
+        <app-card-cursos
+            imageUrl="https://stream-blog-v2.imgix.net/blog/wp-content/uploads/f9547f9b9ba2dfa409118a00d2b7691d/Angular.png?auto=format&auto=compress"
+            tag="Nuevo"
+            title="Introducción a Angular"
+            description="Aprende los conceptos fundamentales de Angular y empieza a crear aplicaciones web."
+            duration="30 horas"
+            rating="⭐⭐⭐⭐ 4.5/5"
+            link="/curso/angular">
+        </app-card-cursos>
+
+        <app-card-cursos
+            imageUrl="https://bestarion.com/wp-content/uploads/2022/04/what-is-golang-1.png"
+            tag="Nuevo"
+            title="Introducción a Go"
+            description="Aprende los conceptos fundamentales de Go y empieza a crear desarrollo backend."
+            duration="30 horas"
+            rating="⭐⭐⭐⭐ 4.5/5"
+            link="/curso/angular">
+        </app-card-cursos>
+    </div>
+</section>
+
+<section class="banner">
+    <div class="banner-content">
+        <h1 class="title-banner">Comienza tu carrera en tecnología <br>hoy mismo</h1>
+        <h3 class="subtitle-banner">Regístrate ahora y obtén acceso a nuestro curso de introducción a <br>la programación completamente gratis.</h3>
+        <button class="btn-comenzar">
+            <i class="fas fa-globe"></i> Empezar ahora
+        </button>
+    </div>
+    <img src="assets/banner.png" alt="banner" class="banner-promo">
+</section>
+
+<section class="tecnologias">
+    <app-tecnologias></app-tecnologias>
 </section>
 
 <app-footer></app-footer>

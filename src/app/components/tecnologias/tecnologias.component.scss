@@ -1,0 +1,53 @@
+.tag-list {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    margin: 2rem 0;
+  }
+  
+  .inner {
+    display: flex;
+    width: fit-content;
+    gap: 1rem;
+  }
+  
+  .tag-left .inner {
+    animation: move-left 15s linear infinite;
+  }
+  
+  .tag-right .inner {
+    animation: move-right 15s linear infinite;
+  }
+  
+  .tag {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: #003960;
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    padding: 0.7rem 1rem;
+    border-radius: 0.4rem;
+    white-space: nowrap;
+  }
+  
+  .tecnologia {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .icon {
+    width: 30px;
+  }
+  
+  @keyframes move-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  
+  @keyframes move-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+  
