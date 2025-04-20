@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from "../../components/header/header.component";
 import { Router } from '@angular/router';
 import { FooterComponent } from "../../components/footer/footer.component";
+import { CardCursosComponent } from "../../components/card-cursos/card-cursos.component";
 
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent],
+  imports: [HeaderComponent, FooterComponent, CardCursosComponent],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss'
 })

@@ -116,3 +116,24 @@
     width: 100%;
     height: auto;
 }
+
+.cursos {
+    text-align: center;
+    padding: 60px 40px;
+  }
+  
+  .cursos-title {
+    font-size: 3rem;
+    margin-bottom: 40px;
+    font-weight: bold;
+    color: #003057;
+  }
+  
+  .courses-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    align-items: stretch;
+  }
+  

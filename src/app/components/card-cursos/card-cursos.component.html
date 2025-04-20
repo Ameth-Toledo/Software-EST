@@ -1,0 +1,31 @@
+<!-- card-cursos.component.html -->
+<div class="card-curso">
+    <!-- Image section (if provided) -->
+    <img *ngIf="imageUrl" [src]="imageUrl" alt="Imagen del curso" class="curso-imagen">
+    
+    <!-- Tag/Badge section (Bestseller) -->
+    <span *ngIf="tag" class="curso-tag">{{ tag }}</span>
+    
+    <!-- Title section -->
+    <h2 class="curso-titulo">{{ title }}</h2>
+    
+    <!-- Description section -->
+    <p class="curso-descripcion">{{ description }}</p>
+    
+    <!-- Button section -->
+    <a [href]="link" class="curso-button">Ver curso</a>
+    
+    <!-- Footer section with duration and rating -->
+    <div class="curso-footer">
+      <span class="curso-duration">{{ duration }}</span>
+      
+      <div class="curso-rating">
+        <!-- Stars - you can replace this with a component that renders stars based on rating -->
+        <div class="stars">
+          <!-- Using unicode stars filled with CSS based on rating -->
+          <span class="star-container">★★★★★</span>
+        </div>
+        <span class="rating-value">{{ rating }}</span>
+      </div>
+    </div>
+  </div>

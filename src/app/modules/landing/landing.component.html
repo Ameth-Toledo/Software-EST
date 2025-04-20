@@ -4,20 +4,42 @@
     <div class="hero-content">
         <h1 class="hero-title">EST SOFTWARE</h1>
         <h3 class="hero-subtitle">Cursos de programación hechos por <br>devs para devs</h3>
-        
         <div class="hero-buttons">
             <button class="btn-login" (click)="sendToLogin($event)"><i class="fas fa-sign-in-alt"></i> Iniciar Sesion</button>
             <button class="btn-register"><i class="fas fa-user-plus"></i> Registrarse</button>
         </div>
     </div>
-    
     <div class="hero-image">
         <img src="assets/hero.jpg" alt="hero illustration">
     </div>
-    
     <div class="wave-container">
         <img src="assets/wave-hero.svg" alt="hero" class="hero-wave">
     </div>
+</section>
+
+<section class="cursos">
+    <h1 class="cursos-title">Nuestros cursos</h1>
+    <div class="courses-grid">
+        <app-card-cursos
+        imageUrl="https://kinsta.com/es/wp-content/uploads/sites/8/2023/04/react-must-be-in-scope-when-using-jsx.jpg"
+        tag="Bestseller"
+        title="Desarrollo Frontend con React"
+        description="Domina React desde cero y conviértete en un desarrollador frontend de élite."
+        duration="25 horas"
+        rating="⭐⭐⭐⭐⭐ 4.9/5"
+        link="/curso/react"
+      ></app-card-cursos>
+      
+      <app-card-cursos
+        imageUrl="https://stream-blog-v2.imgix.net/blog/wp-content/uploads/f9547f9b9ba2dfa409118a00d2b7691d/Angular.png?auto=format&auto=compress"
+        tag="Nuevo"
+        title="Introducción a Angular"
+        description="Aprende los conceptos fundamentales de Angular y empieza a crear aplicaciones web."
+        duration="30 horas"
+        rating="⭐⭐⭐⭐ 4.5/5"
+        link="/curso/angular"
+      ></app-card-cursos>
+          </div>
 </section>
 
 <app-footer></app-footer>
