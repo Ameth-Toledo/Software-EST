@@ -22,4 +22,9 @@ export class LandingComponent {
     this.router.navigate(['login']);
     console.log("Login button clicked");
   }
+
+  sendToRegister(event : Event) {
+    event.preventDefault();
+    this.router.navigate(['register'])
+  }
 }

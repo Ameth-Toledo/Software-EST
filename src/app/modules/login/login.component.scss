@@ -1,0 +1,365 @@
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    display: flex;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-image {
+    flex: 0.9;
+    position: relative;
+    background: linear-gradient(45deg, #062e51, #004e92);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.card-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    animation: moveBackground 30s linear infinite;
+}
+
+@keyframes moveBackground {
+    0% { background-position: 0 0; }
+    100% { background-position: 100% 100%; }
+}
+
+.text-overlay {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    padding: 25px;
+    color: white;
+    text-align: center;
+}
+
+.logo {
+    max-width: 150px;
+    margin: 0 auto 15px;
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+}
+
+.image-text h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to right, #ffffff, #a6c1ee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.image-text p {
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0.9;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.tech-stack {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 25px;
+}
+
+.tech-stack span {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.tech-stack span:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.card-form {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-header {
+    margin-bottom: 20px;
+}
+
+.form-header h1 {
+    font-size: 1.6rem;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-header p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: 500;
+}
+
+.input-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-field i {
+    position: absolute;
+    left: 12px;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.input-field .toggle-password {
+    left: auto;
+    right: 12px;
+    cursor: pointer;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 10px 12px 10px 35px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: #f9fafc;
+}
+
+.input-field input:focus {
+    border-color: #004e92;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 78, 146, 0.1);
+    background: white;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.remember-me input {
+    accent-color: #004e92;
+}
+
+.remember-me label {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.forgot {
+    font-size: 0.85rem;
+    color: #004e92;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.forgot:hover {
+    color: #00356a;
+    text-decoration: underline;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to right, #004e92, #0072c6);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 78, 146, 0.2);
+}
+
+.login-btn:hover {
+    background: linear-gradient(to right, #00356a, #005a9e);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 78, 146, 0.3);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    color: #888;
+    font-size: 0.85rem;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #ddd;
+}
+
+.divider span {
+    padding: 0 12px;
+}
+
+.social-login {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.social-btn {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    font-size: 0.9rem;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+    background: #f7f9fc;
+    border-color: #ccc;
+}
+
+.google:hover {
+    color: #ea4335;
+}
+
+.github:hover {
+    color: #24292e;
+}
+
+.register {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.register a {
+    color: #004e92;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.register a:hover {
+    color: #00356a;
+    text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+    .card {
+        flex-direction: column;
+    }
+    
+    .card-image {
+        min-height: 250px;
+    }
+    
+    .text-overlay {
+        padding: 20px 15px;
+    }
+    
+    .image-text h2 {
+        font-size: 1.6rem;
+    }
+    
+    .image-text p {
+        font-size: 0.95rem;
+    }
+    
+    .card-form {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 500px) {
+    .card-form {
+        padding: 20px 15px;
+    }
+    
+    .social-login {
+        flex-direction: column;
+    }
+    
+    .options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .tech-stack {
+        margin-top: 15px;
+    }
+    
+    .tech-stack span {
+        font-size: 0.75rem;
+        padding: 5px 10px;
+    }
+}

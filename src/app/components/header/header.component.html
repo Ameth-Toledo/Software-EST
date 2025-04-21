@@ -1,7 +1,8 @@
 <header class="nav-bar">
-    <img src="assets/Logo-EST.svg" alt="logo" class="logo">
-    <h1 class="title">EST-SOFTWARE</h1>
-    <button class="btn-login">
-      <i class="fas fa-sign-in-alt"></i> Login
-    </button>
+  <img src="assets/Logo-EST.svg" alt="logo" class="logo" (click)="sendToHome($event)">
+  <h1 class="title">EST-SOFTWARE</h1>
+  <button class="btn-login" (click)="sendToLogin($event)">
+    <i [class]="isAuthenticated ? 'fas fa-sign-out-alt' : 'fas fa-sign-in-alt'"></i>
+    {{ isAuthenticated ? 'Cerrar sesión' : 'Login' }}
+  </button>
 </header>

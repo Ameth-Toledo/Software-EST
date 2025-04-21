@@ -14,6 +14,7 @@ export class TecnologiasComponent {
     { iconPath: 'assets/icons/angular.svg', techName: 'Angular' },
     { iconPath: 'assets/icons/github.svg', techName: 'Github' },
     { iconPath: 'assets/icons/go.svg', techName: 'Go' },
+    { iconPath: 'assets/icons/postman.svg', techName: 'Postman' },
     { iconPath: 'assets/icons/linux.svg', techName: 'Linux' },
     { iconPath: 'assets/icons/mysql.svg', techName: 'MySQL' },
     { iconPath: 'assets/icons/typescript.svg', techName: 'TypeScript' },
