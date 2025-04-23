@@ -27,13 +27,21 @@
             
             <form id="registerForm" (ngSubmit)="onSubmit($event)">
                 <div class="input-group">
-                    <label for="name">Nombre completo</label>
+                    <label for="name">Nombre</label>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" id="name" [(ngModel)]="nombre" name="nombre" placeholder="Tu nombre completo" required>
+                        <input type="text" id="name" [(ngModel)]="nombre" name="nombre" placeholder="Tu nombre" required>
                     </div>
                 </div>
                 
+                <div class="input-group">
+                    <label for="apellido">Apellido</label>
+                    <div class="input-field">
+                      <i class="fas fa-user"></i>
+                      <input type="text" id="apellido" [(ngModel)]="apellido" name="apellido" placeholder="Tu apellido" required>
+                    </div>
+                </div>
+
                 <div class="input-group">
                     <label for="email">Correo electrónico</label>
                     <div class="input-field">

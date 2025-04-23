@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { HeaderComponent } from "../../components/header/header.component";
 import { Router } from '@angular/router';
 import { FooterComponent } from "../../components/footer/footer.component";
@@ -14,7 +14,7 @@ import { GithubCardComponent } from "../../components/github-card/github-card.co
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss'
 })
-export class LandingComponent {
+export class LandingComponent implements AfterViewInit {
   constructor (private router : Router) {}
 
   sendToLogin(event : Event) {
@@ -26,5 +26,24 @@ export class LandingComponent {
   sendToRegister(event : Event) {
     event.preventDefault();
     this.router.navigate(['register'])
+  }
+
+  @ViewChild('cardsContainer', { static: false }) cardsContainer!: ElementRef;
+
+  ngAfterViewInit(): void {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const card = entry.target as HTMLElement;
+        if (entry.isIntersecting) {
+          card.classList.add('animate-in');
+          observer.unobserve(card);
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    const cards = this.cardsContainer.nativeElement.querySelectorAll('app-github-card');
+    cards.forEach((card: Element) => observer.observe(card));
   }
 }

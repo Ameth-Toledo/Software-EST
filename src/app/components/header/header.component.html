@@ -1,8 +1,25 @@
 <header class="nav-bar">
   <img src="assets/Logo-EST.svg" alt="logo" class="logo" (click)="sendToHome($event)">
   <h1 class="title">EST-SOFTWARE</h1>
-  <button class="btn-login" (click)="sendToLogin($event)">
-    <i [class]="isAuthenticated ? 'fas fa-sign-out-alt' : 'fas fa-sign-in-alt'"></i>
-    {{ isAuthenticated ? 'Cerrar sesión' : 'Login' }}
+
+  <!-- Mostrar CURSOS solo si está autenticado -->
+  <a *ngIf="isAuthenticated" class="cursos-link" routerLink="/cursos">Cursos</a>
+
+  <!-- Menú hamburguesa si autenticado -->
+  <div *ngIf="isAuthenticated" class="menu-container">
+    <button class="hamburger-btn" (click)="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div *ngIf="isMenuOpen" class="dropdown-menu">
+      <a (click)="goTo('config')"><i class="fas fa-user-cog"></i> Cuenta</a>
+      <a (click)="goTo('home')"><i class="fas fa-home"></i> Home</a>
+      <a (click)="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+    </div>
+  </div>
+
+  <!-- Botón login si NO está autenticado -->
+  <button *ngIf="!isAuthenticated" class="btn-login" (click)="sendToLogin($event)">
+    <i class="fas fa-sign-in-alt"></i>
+    Login
   </button>
 </header>

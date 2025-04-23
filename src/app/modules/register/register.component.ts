@@ -21,6 +21,7 @@ export class RegisterComponent {
   selectedFile: File | null = null;
 
   nombre: string = '';
+  apellido: string = '';
   correo: string = '';
   contrasena: string = '';
   confirmPassword: string = '';
@@ -60,6 +61,7 @@ export class RegisterComponent {
 
     const userData: user = {
       nombre: this.nombre,
+      apellido: this.apellido,
       correo: this.correo,
       contrasena: this.contrasena,
       fotoPerfil: this.selectedFile ? this.selectedFile.name : '', 
@@ -69,7 +71,6 @@ export class RegisterComponent {
 
     this.registerService.registerUser(userData).subscribe(
       response => {
-        console.log('Usuario registrado con éxito', response);
         this.router.navigate(['login']); 
       },
       error => {

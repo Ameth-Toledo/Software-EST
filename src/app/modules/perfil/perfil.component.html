@@ -1,0 +1,143 @@
+<app-header></app-header>
+
+<div class="profile-container">
+  <div class="profile-sidebar">
+    <div class="profile-image-container">
+        <img [src]="usuario.fotoPerfil" (error)="onImageError($event)" alt="Foto de perfil" class="profile-image">
+        <div class="profile-status" [ngClass]="{'status-premium': usuario.planPremium}">
+          <i class="fas" [ngClass]="usuario.planPremium ? 'fa-crown' : 'fa-user'"></i>
+        </div>
+      </div>
+    
+    <h2 class="user-name">{{ usuario.nombre }} {{ usuario.apellido }}</h2>
+    <p class="user-email">{{ usuario.correo }}</p>
+    
+    <div class="plan-badge" [ngClass]="usuario.planPremium ? 'plan-premium' : 'plan-free'">
+      <i class="fas" [ngClass]="usuario.planPremium ? 'fa-crown' : 'fa-user'"></i>
+      <span>{{ usuario.planPremium ? 'Plan Premium' : 'Plan Gratuito' }}</span>
+    </div>
+    
+    <button class="btn-upload-photo">
+      <i class="fas fa-camera"></i>
+      <span>Cambiar foto</span>
+    </button>
+    
+    <div class="sidebar-divider"></div>
+    
+    <div class="user-stats">
+      <!--<div class="stat-item">
+        <span class="stat-label">Miembro desde</span>
+        <span class="stat-value">{{ usuario.fechaRegistro | date:'dd/MM/yyyy' }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Último acceso</span>
+        <span class="stat-value">{{ usuario.ultimoAcceso | date:'dd/MM/yyyy' }}</span>
+      </div>-->
+    </div>
+    
+    <button *ngIf="!usuario.planPremium" class="btn-upgrade">
+      <i class="fas fa-crown"></i>
+      <span>Actualizar a Premium</span>
+    </button>
+  </div>
+  
+  <div class="profile-main">
+    <div class="profile-header">
+      <h1>Información de Perfil</h1>
+      <button class="btn-edit" (click)="toggleEditMode()">
+        <i class="fas" [ngClass]="editMode ? 'fa-times' : 'fa-pen'"></i>
+        <span>{{ editMode ? 'Cancelar' : 'Editar perfil' }}</span>
+      </button>
+    </div>
+    
+    <div class="profile-card">
+      <div class="profile-form" [ngClass]="{'edit-mode': editMode}">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre</label>
+            <div class="input-container">
+              <input type="text" [value]="usuario.nombre" [readOnly]="!editMode">
+              <i *ngIf="editMode" class="fas fa-pen input-icon"></i>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Apellido</label>
+            <div class="input-container">
+              <input type="text" [value]="usuario.apellido" [readOnly]="!editMode">
+              <i *ngIf="editMode" class="fas fa-pen input-icon"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <div class="input-container">
+            <input type="email" [value]="usuario.correo" [readOnly]="!editMode">
+            <i *ngIf="editMode" class="fas fa-pen input-icon"></i>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Contraseña</label>
+            <div class="input-container">
+              <input type="password" value="••••••••" [readOnly]="!editMode">
+              <i *ngIf="editMode" class="fas fa-eye input-icon"></i>
+            </div>
+          </div>
+          
+          <div class="form-group" *ngIf="editMode">
+            <label>Confirmar contraseña</label>
+            <div class="input-container">
+              <input type="password" placeholder="Confirmar contraseña">
+              <i class="fas fa-eye input-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="account-benefits" *ngIf="usuario.planPremium">
+        <h3>Beneficios de tu cuenta Premium</h3>
+        <div class="benefits-container">
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <i class="fas fa-download"></i>
+            </div>
+            <div class="benefit-info">
+              <h4>Descargas ilimitadas</h4>
+              <p>Accede y descarga todos los recursos sin restricciones</p>
+            </div>
+          </div>
+          
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="benefit-info">
+              <h4>Acceso prioritario</h4>
+              <p>Sé el primero en acceder a nuevas funcionalidades</p>
+            </div>
+          </div>
+          
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <div class="benefit-info">
+              <h4>Soporte personalizado</h4>
+              <p>Atención prioritaria para todas tus consultas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="profile-actions" *ngIf="editMode">
+        <button class="btn-save" (click)="actualizarPerfil()">
+          <i class="fas fa-save"></i>
+          <span>Guardar cambios</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

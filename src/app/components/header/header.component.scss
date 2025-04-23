@@ -50,3 +50,55 @@
 .btn-login i {
     font-size: 18px;
 }
+
+.menu-container {
+    position: relative;
+  }
+  
+  .hamburger-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #032E4C;
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    z-index: 1000;
+    overflow: hidden;
+  }
+  
+  .dropdown-menu a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    transition: background 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }  
+  
+  .dropdown-menu a:hover {
+    background-color: #005d8f;
+  }
+  
+  .cursos-link {
+    color: white;
+    margin-right: 16px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+  }
+  

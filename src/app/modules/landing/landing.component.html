@@ -72,7 +72,7 @@
         <img src="assets/github.gif" alt="GitHub Gif" class="github-img">
         <h1 class="title-coolaborativo">Aprende a trabajar en colaborativo en GitHub</h1>
     </div>
-    <div class="cards-container">
+    <div class="cards-container" #cardsContainer>
         <app-github-card user="Ameth Toledo" repoName="Api-Go"></app-github-card>
         <app-github-card user="FabricioPRZ" repoName="FastAPI"></app-github-card>
         <app-github-card user="JaredTorres" repoName="Frontend"></app-github-card>
@@ -87,6 +87,7 @@
         [imageUrl]="'assets/devs/ameth.webp'"
         [name]="'Ameth Toledo'"
         [role]="'FullStack Developer'"
+        [githubUrl]="'https://github.com/Ameth-Toledo'"
         [techLogos]="[
           'assets/icons/angular.svg',
           'assets/icons/react.svg',
@@ -106,6 +107,7 @@
         [imageUrl]="'assets/devs/fabricio.webp'"
         [name]="'Fabricio Perez'"
         [role]="'FullStack Developer'"
+        [githubUrl]="'https://github.com/FabricioPRZ'"
         [techLogos]="[
           'assets/icons/angular.svg',
           'assets/icons/react.svg',

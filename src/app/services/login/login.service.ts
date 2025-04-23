@@ -7,7 +7,7 @@ import { Login } from '../../models/login';
   providedIn: 'root'
 })
 export class LoginService {
-  private apiUrl = 'https://backend-est.onrender.com/login';  
+  private apiUrl = 'http://localhost:8080/login';  
 
   constructor(private http: HttpClient) { }
 

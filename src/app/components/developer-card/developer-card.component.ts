@@ -14,4 +14,12 @@ export class DeveloperCardComponent {
   @Input() name: string = '';
   @Input() role: string = '';
   @Input() techLogos: string[] = [];
+  @Input() githubUrl: string = '';
+
+  goToGitHub(event: Event): void {
+    event.preventDefault();
+    if (this.githubUrl) {
+      window.open(this.githubUrl, '_blank'); 
+    }
+  }
 }

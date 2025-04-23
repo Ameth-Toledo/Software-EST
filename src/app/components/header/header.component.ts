@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
   isAuthenticated: boolean = false;
+  isMenuOpen: boolean = false;
 
   constructor(private router: Router, private authService: AuthService) {}
 
@@ -22,15 +24,30 @@ export class HeaderComponent {
 
   sendToLogin(event: Event) {
     event.preventDefault();
-    if (this.isAuthenticated) {
-      this.authService.logout();
-    } else {
-      this.router.navigate(['login']);
-    }
+    this.router.navigate(['login']);
   }
 
   sendToHome(event: Event) {
     event.preventDefault();
     this.router.navigate(['']);
   }
+
+  logout() {
+    this.authService.logout();
+    this.isMenuOpen = false;
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  goTo(route: string) {
+    if (route === 'config') {
+      this.router.navigate(['/perfil']);
+    } else if (route === 'home') {
+      this.router.navigate(['']);
+    }
+    this.isMenuOpen = false;
+  }  
 }
+

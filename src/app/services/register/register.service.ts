@@ -7,20 +7,24 @@ import { user } from '../../models/user';
   providedIn: 'root'
 })
 export class RegisterService {
-  private apiUrl = 'https://backend-est.onrender.com/users';
+  private apiUrl = 'http://localhost:8080/users';
 
   constructor(private http: HttpClient) { }
 
-  registerUser(userData: user): Observable<any> {
+  registerUser(userData: user, file?: File): Observable<any> {
     const formData = new FormData();
-
+  
     formData.append('nombre', userData.nombre);
+    formData.append('apellido', userData.apellido);
     formData.append('correo', userData.correo);
     formData.append('contrasena', userData.contrasena);
-    formData.append('foto_perfil', userData.fotoPerfil || '');
     formData.append('rol_id', userData.rolId ? userData.rolId.toString() : '1'); 
     formData.append('plan', userData.plan || 'gratuito'); 
-
+    
+    if (file) {
+      formData.append('foto_perfil', file, file.name);
+    }
+  
     return this.http.post<any>(this.apiUrl, formData);
   }
 }
