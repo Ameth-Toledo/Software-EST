@@ -248,7 +248,7 @@
     padding: 0 15px;
   }
   
-  .social-login {
+  .social-register {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
@@ -277,6 +277,7 @@
   
   .google:hover { color: #ea4335; }
   .github:hover { color: #24292e; }
+  .facebook:hover { color: #0866FF; }
   
   .password-hint {
     font-size: 0.75rem;

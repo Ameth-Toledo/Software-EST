@@ -11,7 +11,7 @@ export class RegisterService {
 
   constructor(private http: HttpClient) { }
 
-  registerUser(userData: user, file?: File): Observable<any> {
+  registerUser(userData: user, file?: File | null): Observable<any> {
     const formData = new FormData();
   
     formData.append('nombre', userData.nombre);

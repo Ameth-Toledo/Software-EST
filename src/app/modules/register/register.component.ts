@@ -29,6 +29,18 @@ export class RegisterComponent {
   plan: string = 'gratuito'; 
   rolId: number = 1; 
 
+  loginWithGoogle() {
+    window.location.href = 'http://localhost:8080/auth/google/register';
+  }
+
+  loginWithGitHub() {
+    window.location.href = 'http://localhost:8080/auth/github/register';
+  }
+
+  loginWithFacebook() {
+    window.location.href = "http://localhost:8080/auth/facebook/register"
+  }
+
   triggerFileInput() {
     this.fileInput.nativeElement.click();
   }
@@ -52,11 +64,6 @@ export class RegisterComponent {
     if (this.contrasena !== this.confirmPassword) {
       alert("Las contraseñas no coinciden.");
       return;
-    }    
-
-    if (this.contrasena !== this.confirmPassword) {
-      alert("Las contraseñas no coinciden.");
-      return;
     }
 
     const userData: user = {
@@ -64,12 +71,12 @@ export class RegisterComponent {
       apellido: this.apellido,
       correo: this.correo,
       contrasena: this.contrasena,
-      fotoPerfil: this.selectedFile ? this.selectedFile.name : '', 
+      fotoPerfil: '', 
       plan: this.plan,
       rolId: this.rolId
     };
 
-    this.registerService.registerUser(userData).subscribe(
+    this.registerService.registerUser(userData, this.selectedFile).subscribe(
       response => {
         this.router.navigate(['login']); 
       },

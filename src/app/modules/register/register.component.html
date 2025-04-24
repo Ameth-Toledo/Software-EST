@@ -93,14 +93,20 @@
                     <span>o regístrate con</span>
                 </div>
                 
-                <div class="social-login">
-                    <a href="/api/auth/google" class="social-btn google">
+                <div class="social-register">
+                    <a (click)="loginWithGoogle()" class="social-btn google">
                         <i class="fab fa-google"></i>
                         <span>Google</span>
                     </a>
-                    <a href="/api/auth/github" class="social-btn github">
+                    
+                    <a (click)="loginWithGitHub()" class="social-btn github">
                         <i class="fab fa-github"></i>
                         <span>GitHub</span>
+                    </a>
+
+                    <a (click)="loginWithFacebook()" class="social-btn facebook">
+                        <i class="fab fa-facebook"></i>
+                        <span>Facebook</span>
                     </a>
                 </div>
                 
