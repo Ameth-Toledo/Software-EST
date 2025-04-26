@@ -4,6 +4,8 @@ import { LoginComponent } from './modules/login/login.component';
 import { HomeComponent } from './modules/home/home.component';
 import { RegisterComponent } from './modules/register/register.component';
 import { PerfilComponent } from './modules/perfil/perfil.component';
+import { AuthCallbackComponent } from './modules/auth-callback/auth-callback.component';
+import { NotfoundComponent } from './modules/notfound/notfound.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '', pathMatch: 'full' },
@@ -12,4 +14,6 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'perfil', component: PerfilComponent },
+    { path: 'auth-callback', component: AuthCallbackComponent },
+    { path: '**', component: NotfoundComponent }
 ];

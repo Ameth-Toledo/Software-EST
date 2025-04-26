@@ -1,3 +1,34 @@
 <app-header></app-header>
 
+<div class="content-wrapper">
+  <!-- Welcome Section -->
+  <section class="welcome-banner">
+    <div class="welcome-content">
+      <h1 class="welcome-heading">Hola, <span class="user-name">{{userName || 'Usuario'}}</span></h1>
+      <div class="welcome-divider"></div>
+      <p class="welcome-message">Explora nuestros cursos especializados</p>
+    </div>
+  </section>
+
+  <!-- Courses Section -->
+  <section class="courses-container">
+    <div class="section-header">
+      <h2 class="section-title">Catálogo de Cursos</h2>
+      <div class="title-underline"></div>
+    </div>
+    
+    <div class="courses-grid">
+      <div class="course-item" *ngFor="let course of courses">
+        <app-card-cursos
+          [imageUrl]="getCourseImageUrl(course.imagen_portada)"
+          [title]="course.titulo"
+          [description]="course.descripcion"
+          [tag]="course.es_gratuito ? 'Gratis' : 'Premium'"
+          [link]="'/course/' + course.id">
+        </app-card-cursos>
+      </div>
+    </div>
+  </section>
+</div>
+
 <app-footer></app-footer>

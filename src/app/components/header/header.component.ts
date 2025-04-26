@@ -32,6 +32,11 @@ export class HeaderComponent {
     this.router.navigate(['']);
   }
 
+  sendToHomeUser(event: Event){
+    event.preventDefault();
+    this.router.navigate(['home'])
+  }
+
   logout() {
     this.authService.logout();
     this.isMenuOpen = false;

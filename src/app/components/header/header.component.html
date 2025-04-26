@@ -2,10 +2,8 @@
   <img src="assets/Logo-EST.svg" alt="logo" class="logo" (click)="sendToHome($event)">
   <h1 class="title">EST-SOFTWARE</h1>
 
-  <!-- Mostrar CURSOS solo si está autenticado -->
-  <a *ngIf="isAuthenticated" class="cursos-link" routerLink="/cursos">Cursos</a>
+  <a *ngIf="isAuthenticated" class="cursos-link" (click)="sendToHomeUser($event)">Cursos</a>
 
-  <!-- Menú hamburguesa si autenticado -->
   <div *ngIf="isAuthenticated" class="menu-container">
     <button class="hamburger-btn" (click)="toggleMenu()">
       <i class="fas fa-bars"></i>
@@ -17,7 +15,6 @@
     </div>
   </div>
 
-  <!-- Botón login si NO está autenticado -->
   <button *ngIf="!isAuthenticated" class="btn-login" (click)="sendToLogin($event)">
     <i class="fas fa-sign-in-alt"></i>
     Login

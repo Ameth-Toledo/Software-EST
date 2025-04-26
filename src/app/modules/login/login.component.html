@@ -75,13 +75,17 @@
         </div>
 
         <div class="social-login">
-          <button type="button" class="social-btn google">
+          <button type="button" class="social-btn google" (click)="loginWithGoogle()">
             <i class="fab fa-google"></i>
             <span>Google</span>
           </button>
-          <button type="button" class="social-btn github">
+          <button type="button" class="social-btn github" (click)="loginWithGitHub()">
             <i class="fab fa-github"></i>
             <span>GitHub</span>
+          </button>
+          <button type="button" class="social-btn facebook" (click)="loginWithFacebook()">
+            <i class="fab fa-facebook"></i>
+            <span>Facebook</span>
           </button>
         </div>
 

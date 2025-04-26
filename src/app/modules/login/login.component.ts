@@ -32,8 +32,7 @@ export class LoginComponent {
     this.loginService.login(this.loginData).subscribe(
       (response) => {
         localStorage.setItem('authToken', response.token);  
-        this.authService.login();  
-        this.router.navigate(['/home']);
+        this.authService.loginAndRedirect();  // Usar el nuevo método
       },
       (error) => {
         console.error('Login failed:', error);
@@ -45,4 +44,16 @@ export class LoginComponent {
     event.preventDefault();
     this.router.navigate(['register'])
   }
+
+  loginWithFacebook(): void {
+    window.location.href = 'http://localhost:8080/auth/facebook/register';
+  }
+
+  loginWithGitHub(): void {
+    window.location.href = 'http://localhost:8080/auth/github/register';
+  }
+  
+  loginWithGoogle(): void {
+    window.location.href = 'http://localhost:8080/auth/google/register';
+  }  
 }

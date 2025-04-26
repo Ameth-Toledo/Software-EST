@@ -55,7 +55,7 @@ export class RegisterComponent {
 
   onSubmit(event: Event) {
     event.preventDefault();
-
+  
     if (!this.nombre.trim() || !this.correo.trim() || !this.contrasena.trim() || !this.confirmPassword.trim()) {
       alert("Por favor, complete todos los campos.");
       return;
@@ -65,17 +65,17 @@ export class RegisterComponent {
       alert("Las contraseñas no coinciden.");
       return;
     }
-
+  
     const userData: user = {
       nombre: this.nombre,
       apellido: this.apellido,
       correo: this.correo,
       contrasena: this.contrasena,
-      fotoPerfil: '', 
+      fotoPerfil: this.selectedFile, 
       plan: this.plan,
       rolId: this.rolId
     };
-
+  
     this.registerService.registerUser(userData, this.selectedFile).subscribe(
       response => {
         this.router.navigate(['login']); 
@@ -85,7 +85,7 @@ export class RegisterComponent {
         alert('Hubo un problema al registrar al usuario. Intenta nuevamente.');
       }
     );
-  }
+  }  
 
   sendToLogin(event: Event) {
     event.preventDefault();

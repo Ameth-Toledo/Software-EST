@@ -15,9 +15,16 @@ export class AuthService {
     }
   }
 
+  // Modificado para no redirigir automáticamente
   login() {
     localStorage.setItem('isAuthenticated', 'true');
     this.isAuthenticated.next(true);
+    // Eliminamos la redirección automática
+  }
+
+  // Método adicional si necesitas redireccionar explícitamente
+  loginAndRedirect() {
+    this.login();
     this.router.navigate(['/home']);
   }
 

@@ -3,11 +3,20 @@
 <div class="profile-container">
   <div class="profile-sidebar">
     <div class="profile-image-container">
-        <img [src]="usuario.fotoPerfil" (error)="onImageError($event)" alt="Foto de perfil" class="profile-image">
-        <div class="profile-status" [ngClass]="{'status-premium': usuario.planPremium}">
-          <i class="fas" [ngClass]="usuario.planPremium ? 'fa-crown' : 'fa-user'"></i>
-        </div>
+      <img [src]="usuario.fotoPerfil" alt="Foto de perfil" class="profile-image">
+    
+      <div class="profile-status" [ngClass]="{'status-premium': usuario.planPremium}">
+        <i class="fas" [ngClass]="usuario.planPremium ? 'fa-crown' : 'fa-user'"></i>
       </div>
+    
+      <div *ngIf="editMode" class="photo-upload-container">
+        <label for="photoInput" class="btn-upload-photo">
+          <i class="fas fa-camera"></i>
+          <span>Cambiar foto</span>
+        </label>
+        <input type="file" id="photoInput" (change)="onFileSelected($event)" accept="image/*" hidden>
+      </div>
+    </div>    
     
     <h2 class="user-name">{{ usuario.nombre }} {{ usuario.apellido }}</h2>
     <p class="user-email">{{ usuario.correo }}</p>
@@ -17,23 +26,12 @@
       <span>{{ usuario.planPremium ? 'Plan Premium' : 'Plan Gratuito' }}</span>
     </div>
     
-    <button class="btn-upload-photo">
-      <i class="fas fa-camera"></i>
-      <span>Cambiar foto</span>
-    </button>
-    
     <div class="sidebar-divider"></div>
     
-    <div class="user-stats">
-      <!--<div class="stat-item">
-        <span class="stat-label">Miembro desde</span>
-        <span class="stat-value">{{ usuario.fechaRegistro | date:'dd/MM/yyyy' }}</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-label">Último acceso</span>
-        <span class="stat-value">{{ usuario.ultimoAcceso | date:'dd/MM/yyyy' }}</span>
-      </div>-->
-    </div>
+    <div class="stat-item">
+      <span class="stat-label">Frase del día</span>
+      <span class="stat-value">{{ fraseDelDia }}</span>
+    </div>       
     
     <button *ngIf="!usuario.planPremium" class="btn-upgrade">
       <i class="fas fa-crown"></i>
@@ -56,7 +54,7 @@
           <div class="form-group">
             <label>Nombre</label>
             <div class="input-container">
-              <input type="text" [value]="usuario.nombre" [readOnly]="!editMode">
+              <input type="text" [(ngModel)]="usuario.nombre" [readOnly]="!editMode">
               <i *ngIf="editMode" class="fas fa-pen input-icon"></i>
             </div>
           </div>
@@ -64,7 +62,7 @@
           <div class="form-group">
             <label>Apellido</label>
             <div class="input-container">
-              <input type="text" [value]="usuario.apellido" [readOnly]="!editMode">
+              <input type="text" [(ngModel)]="usuario.apellido" [readOnly]="!editMode">
               <i *ngIf="editMode" class="fas fa-pen input-icon"></i>
             </div>
           </div>
@@ -73,30 +71,13 @@
         <div class="form-group">
           <label>Correo electrónico</label>
           <div class="input-container">
-            <input type="email" [value]="usuario.correo" [readOnly]="!editMode">
+            <input class="campo-email" type="email" [(ngModel)]="usuario.correo" [readOnly]="!editMode">
             <i *ngIf="editMode" class="fas fa-pen input-icon"></i>
-          </div>
-        </div>
-        
-        <div class="form-row">
-          <div class="form-group">
-            <label>Contraseña</label>
-            <div class="input-container">
-              <input type="password" value="••••••••" [readOnly]="!editMode">
-              <i *ngIf="editMode" class="fas fa-eye input-icon"></i>
-            </div>
-          </div>
-          
-          <div class="form-group" *ngIf="editMode">
-            <label>Confirmar contraseña</label>
-            <div class="input-container">
-              <input type="password" placeholder="Confirmar contraseña">
-              <i class="fas fa-eye input-icon"></i>
-            </div>
           </div>
         </div>
       </div>
       
+      <!--Aqui si es premium, muestra esto-->
       <div class="account-benefits" *ngIf="usuario.planPremium">
         <h3>Beneficios de tu cuenta Premium</h3>
         <div class="benefits-container">
@@ -132,6 +113,42 @@
         </div>
       </div>
       
+      <!--Aqui si no es premium-->
+      <div class="account-benefits" *ngIf="!usuario.planPremium">
+        <h3>Beneficios de tener cuenta Premium</h3>
+        <div class="benefits-container">
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <i class="fas fa-download"></i>
+            </div>
+            <div class="benefit-info">
+              <h4>Descargas ilimitadas</h4>
+              <p>Accede y descarga todos los recursos sin restricciones</p>
+            </div>
+          </div>
+          
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="benefit-info">
+              <h4>Acceso prioritario</h4>
+              <p>Sé el primero en acceder a nuevas funcionalidades</p>
+            </div>
+          </div>
+          
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <div class="benefit-info">
+              <h4>Soporte personalizado</h4>
+              <p>Atención prioritaria para todas tus consultas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="profile-actions" *ngIf="editMode">
         <button class="btn-save" (click)="actualizarPerfil()">
           <i class="fas fa-save"></i>

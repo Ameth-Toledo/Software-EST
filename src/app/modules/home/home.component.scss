@@ -1,0 +1,83 @@
+/* Estilos base */
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* Welcome Section - Manteniendo tu estilo */
+  .welcome-banner {
+    background-color: #f5f9fc;
+    padding: 2rem 0;
+    margin: 1.5rem 0;
+    text-align: center;
+  }
+  
+  .welcome-heading {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    color: #003960;
+    margin-bottom: 0.5rem;
+    
+    .user-name {
+      font-weight: 600;
+      color: #005d8f;
+    }
+  }
+  
+  .welcome-divider {
+    width: 60px;
+    height: 3px;
+    background-color: #4fc3f7;
+    margin: 0 auto 1rem;
+  }
+  
+  .welcome-message {
+    font-family: 'Poppins', sans-serif;
+    color: #4a5568;
+  }
+  
+  /* Courses Section - Simple y limpio */
+  .courses-container {
+    padding: 1rem 0 3rem;
+  }
+  
+  .section-header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    color: #003960;
+    margin-bottom: 0.5rem;
+  }
+  
+  .title-underline {
+    width: 50px;
+    height: 2px;
+    background-color: #032E4C;
+    margin: 0 auto;
+  }
+  
+  /* Grid de cursos con mejor espaciado */
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;  /* Espaciado aumentado entre cards */
+    padding: 1.5rem 0;
+  }
+  
+  @media (max-width: 768px) {
+    .courses-grid {
+      gap: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .courses-grid {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+  }

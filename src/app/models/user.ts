@@ -4,12 +4,13 @@ export interface user {
     apellido: string;
     correo: string;
     contrasena: string;
-    fotoPerfil?: string | null; 
-    rolId?: number | null; 
+    fotoPerfil?: File | null; // Cambiar a File si estás manejando archivos
     rol_id?: number | null; // Agregado para compatibilidad con la API 
     plan: string;
-}
-
-export interface PerfilUsuario extends user {
+    rolId?: number;
+  }
+  
+  export interface PerfilUsuario extends user {
     planPremium: boolean;
-}
+  }
+  
