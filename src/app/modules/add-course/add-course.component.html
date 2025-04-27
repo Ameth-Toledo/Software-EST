@@ -1,0 +1,128 @@
+<app-header></app-header>
+
+<main class="add-course-container">
+  <div class="form-preview-wrapper">
+    <!-- Formulario -->
+    <div class="form-card">
+      <div class="form-header">
+        <div class="icon-circle">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <h2>Crear Nuevo Curso</h2>
+        <p>Completa los detalles y ve cómo se verá tu curso</p>
+      </div>
+      
+      <form [formGroup]="courseForm" (ngSubmit)="onSubmit()" class="course-form">
+        <!-- Grupo de Título -->
+        <div class="form-group floating">
+          <input 
+            type="text" 
+            id="titulo" 
+            formControlName="titulo"
+            placeholder=" "
+            [class.invalid]="courseForm.get('titulo')?.invalid && courseForm.get('titulo')?.touched">
+          <label for="titulo">Título del Curso</label>
+          <i class="fas fa-heading"></i>
+          <div *ngIf="courseForm.get('titulo')?.invalid && courseForm.get('titulo')?.touched" class="error-message">
+            <i class="fas fa-exclamation-circle"></i> El título es requerido (mín. 5 caracteres)
+          </div>
+        </div>
+
+        <!-- Grupo de Descripción -->
+        <div class="form-group floating">
+          <textarea 
+            id="descripcion" 
+            formControlName="descripcion" 
+            rows="3"
+            placeholder=" "
+            [class.invalid]="courseForm.get('descripcion')?.invalid && courseForm.get('descripcion')?.touched"></textarea>
+          <label for="descripcion">Descripción del Curso</label>
+          <i class="fas fa-align-left"></i>
+          <div *ngIf="courseForm.get('descripcion')?.invalid && courseForm.get('descripcion')?.touched" class="error-message">
+            <i class="fas fa-exclamation-circle"></i> La descripción es requerida (mín. 20 caracteres)
+          </div>
+        </div>
+
+        <!-- Grupo de Imagen -->
+        <div class="form-group file-upload">
+          <label class="file-upload-label">
+            <input type="file" id="imagen_portada" (change)="onFileSelected($event)" accept="image/*">
+            <span class="file-upload-button">
+              <i class="fas fa-cloud-upload-alt"></i> Seleccionar imagen
+            </span>
+            <span class="file-name" *ngIf="selectedFile">
+              {{ selectedFile.name }}
+            </span>
+            <span class="file-name" *ngIf="!selectedFile">
+              Ningún archivo seleccionado
+            </span>
+          </label>
+          <div *ngIf="courseForm.get('imagen_portada')?.invalid && courseForm.get('imagen_portada')?.touched" class="error-message">
+            <i class="fas fa-exclamation-circle"></i> La imagen es requerida
+          </div>
+        </div>
+
+        <!-- Grupo Checkbox -->
+        <div class="form-group checkbox-group">
+          <label class="checkbox-container">
+            <input type="checkbox" id="es_gratuito" formControlName="es_gratuito">
+            <span class="checkmark"></span>
+            <span class="checkbox-label">Curso Gratuito</span>
+          </label>
+        </div>
+
+        <!-- Mensaje de error -->
+        <div *ngIf="errorMessage" class="form-error">
+          <i class="fas fa-exclamation-triangle"></i> {{ errorMessage }}
+        </div>
+
+        <!-- Botones -->
+        <div class="form-actions">
+          <button type="button" class="cancel-btn" (click)="goBack()">
+            <i class="fas fa-times"></i> Cancelar
+          </button>
+          <button 
+            type="submit" 
+            class="submit-btn"
+            [disabled]="courseForm.invalid || isLoading">
+            <i class="fas fa-save"></i> 
+            <span *ngIf="!isLoading">Publicar Curso</span>
+            <span *ngIf="isLoading">Publicando...</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Vista previa -->
+    <div class="preview-card">
+      <h3>Vista Previa del Curso</h3>
+      <div class="course-preview">
+        <div class="preview-image">
+          <img [src]="imagePreview || 'assets/default-course.jpg'" alt="Vista previa del curso">
+          <div class="preview-badge" *ngIf="courseForm.get('es_gratuito')?.value">
+            GRATIS
+          </div>
+        </div>
+        <div class="preview-content">
+          <h4>{{ courseForm.get('titulo')?.value || 'Título del curso' }}</h4>
+          <p>{{ courseForm.get('descripcion')?.value || 'Descripción del curso aparecerá aquí' }}</p>
+          <div class="preview-meta">
+            <span><i class="fas fa-user-tie"></i> {{ currentUser.name || 'Tu nombre' }}</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="preview-tips">
+        <h4><i class="fas fa-lightbulb"></i> Consejos para un buen curso</h4>
+        <ul>
+          <li>Usa un título claro y descriptivo</li>
+          <li>Incluye una imagen atractiva</li>
+          <li>Describe bien los contenidos</li>
+          <li>Marca como gratuito si es apropiado</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
+
+<app-footer></app-footer>

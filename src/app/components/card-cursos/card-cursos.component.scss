@@ -96,3 +96,52 @@
     font-weight: 600;
     font-size: 14px;
 }
+
+@media (min-width: 957px) {
+}
+
+@media (max-width: 956px) {
+}
+
+@media (max-width: 767px) {
+    .card-curso {
+        width: 100%;
+        max-width: 200px;
+        border-radius: 8px;
+    }
+    
+    .curso-imagen {
+        width: 100%;
+        height: 100px;
+    }
+    
+    .curso-tag {
+        font-size: 10px;
+    }
+    
+    .curso-titulo {
+        font-size: 14px;
+    }
+    
+    .curso-descripcion {
+        font-size: 10px;
+    }
+    
+    .curso-button {
+        padding: 10px 15px;
+        font-size: 10px;
+    }
+    
+    .curso-duration {
+        color: #666;
+        font-size: 10px;
+    }
+    
+    .star-container {
+        display: none;
+    }
+    
+    .rating-value {
+        font-size: 10px;
+    }
+}

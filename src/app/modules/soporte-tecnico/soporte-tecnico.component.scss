@@ -1,0 +1,351 @@
+/* ESTILOS BASE */
+.estsupport-main {
+    font-family: 'Poppins', sans-serif;
+    color: #032E4C;
+    line-height: 1.6;
+    background-color: #f5f9fc;
+    padding-top: 80px; /* Espacio para el header */
+    min-height: calc(100vh - 120px); /* Altura mínima menos header/footer */
+  }
+  
+  /* HERO SECTION */
+  .estsupport-hero {
+    background: linear-gradient(135deg, #003960 0%, #032E4C 100%);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+    margin-bottom: 2rem;
+  }
+  
+  .estsupport-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .estsupport-hero-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: #ffd700;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  
+  .estsupport-hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  .estsupport-hero-text {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 300;
+  }
+  
+  /* CONTACTO DIRECTO */
+  .estsupport-direct-contact {
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .estsupport-section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #003960;
+    font-weight: 600;
+    position: relative;
+  }
+  
+  .estsupport-section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #005d8f;
+    margin: 1rem auto 0;
+    border-radius: 2px;
+  }
+  
+  .estsupport-contact-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .estsupport-contact-card {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+    text-align: center;
+  }
+  
+  .estsupport-contact-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .estsupport-contact-icon {
+    font-size: 2.5rem;
+    color: #005d8f;
+    margin-bottom: 1rem;
+  }
+  
+  .estsupport-contact-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #003960;
+  }
+  
+  .estsupport-contact-text {
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+  
+  .estsupport-contact-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: #005d8f;
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+  }
+  
+  .estsupport-contact-button:hover {
+    background-color: #003960;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .estsupport-contact-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .estsupport-chat-button {
+    background-color: #ff6b4a;
+  }
+  
+  .estsupport-chat-button:hover {
+    background-color: #e05a3a;
+  }
+  
+  /* FAQ */
+  .estsupport-faq {
+    padding: 3rem 2rem;
+    background-color: #e8f1f8;
+    margin: 2rem 0;
+  }
+  
+  .estsupport-faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .estsupport-faq-item {
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .estsupport-faq-question {
+    width: 100%;
+    padding: 1.5rem;
+    text-align: left;
+    background: white;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #003960;
+  }
+  
+  .question {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .estsupport-faq-question i {
+    transition: transform 0.3s;
+  }
+  
+  .estsupport-faq-question i.rotate {
+    transform: rotate(180deg);
+  }
+  
+  .estsupport-faq-answer {
+    padding: 0 1.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background: white;
+  }
+  
+  .estsupport-faq-answer.active {
+    max-height: 500px;
+    padding: 0 1.5rem 1.5rem;
+  }
+  
+  .estsupport-faq-answer p {
+    color: #555;
+    margin-bottom: 1rem;
+  }
+  
+  .estsupport-faq-answer ol, .estsupport-faq-answer ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* FORMULARIO */
+  .estsupport-report {
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .estsupport-report-card {
+    background: white;
+    border-radius: 10px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  
+  .estsupport-report-text {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #555;
+  }
+  
+  .estsupport-report-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .estsupport-form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .estsupport-form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #003960;
+  }
+  
+  .estsupport-form-input, .estsupport-form-textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s;
+  }
+  
+  .estsupport-form-input:focus, .estsupport-form-textarea:focus {
+    border-color: #005d8f;
+    outline: none;
+  }
+  
+  .estsupport-form-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  .estsupport-error {
+    color: #e05a3a;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+  
+  .estsupport-submit-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: #005d8f;
+    color: white;
+    border-radius: 50px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+    margin-top: 1rem;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .estsupport-submit-button:hover {
+    background-color: #003960;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .estsupport-hero {
+      padding: 3rem 1.5rem;
+      clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+    }
+    
+    .estsupport-hero-title {
+      font-size: 2rem;
+    }
+    
+    .estsupport-section-title {
+      font-size: 1.8rem;
+    }
+    
+    .estsupport-contact-methods {
+      grid-template-columns: 1fr;
+    }
+    
+    .estsupport-report-card {
+      padding: 2rem 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .estsupport-main {
+      padding-top: 70px;
+    }
+    
+    .estsupport-hero {
+      padding: 2.5rem 1rem;
+    }
+    
+    .estsupport-hero-title {
+      font-size: 1.8rem;
+    }
+    
+    .estsupport-section-title {
+      font-size: 1.6rem;
+    }
+    
+    .estsupport-contact-button, .estsupport-submit-button {
+      padding: 10px 18px;
+      font-size: 0.9rem;
+    }
+  }

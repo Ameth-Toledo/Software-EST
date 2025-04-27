@@ -1,1 +1,20 @@
-<p>notfound works!</p>
+<app-header></app-header>
+
+<div class="notfound-container">
+  <div class="notfound-wrapper">
+    <div class="notfound-graphic">
+      <img src="assets/404.jpg" alt="Error 404 - Página no encontrada" class="notfound-image">
+    </div>
+    
+    <div class="notfound-message">
+      <h1 class="notfound-title">¡Ups! Página no encontrada</h1>
+      <p class="notfound-description">Lo sentimos, la página que buscas parece haberse perdido en el espacio.</p>
+      <div class="notfound-buttons">
+        <a (click)="sendToHome($event)" class="notfound-btn notfound-btn-primary">Volver al inicio</a>
+        <a (click)="sendToSoporte($event)" class="notfound-btn notfound-btn-secondary">Reportar problema</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

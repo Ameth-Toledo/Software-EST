@@ -1,0 +1,104 @@
+<app-header></app-header>
+
+<main class="estsupport-main">
+  <section class="estsupport-hero">
+    <div class="estsupport-hero-content">
+      <i class="fas fa-headset estsupport-hero-icon"></i>
+      <h1 class="estsupport-hero-title">Soporte Técnico EST SOFTWARE</h1>
+      <p class="estsupport-hero-text">Asistencia especializada para problemas con nuestros cursos</p>
+    </div>
+  </section>
+
+  <section class="estsupport-direct-contact">
+    <h2 class="estsupport-section-title">Contacto directo</h2>
+    <div class="estsupport-contact-methods">
+      <div class="estsupport-contact-card">
+        <i class="fas fa-envelope estsupport-contact-icon"></i>
+        <h3 class="estsupport-contact-title">Correo electrónico</h3>
+        <p class="estsupport-contact-text">shakerzest&#64;gmail.com</p>
+        <a href="mailto:shakerzest@gmail.com?subject=Soporte Técnico EST SOFTWARE" class="estsupport-contact-button">
+          <i class="fas fa-paper-plane"></i> Enviar mensaje
+        </a>
+      </div>
+      
+      <div class="estsupport-contact-card">
+        <i class="fas fa-comment-dots estsupport-contact-icon"></i>
+        <h3 class="estsupport-contact-title">Chat en línea</h3>
+        <p class="estsupport-contact-text">Disponible 24/7</p>
+        <button class="estsupport-contact-button estsupport-chat-button" (click)="openChat()">
+          <i class="fas fa-comments"></i> Iniciar chat
+        </button>
+      </div>
+      
+      <div class="estsupport-contact-card">
+        <i class="fas fa-phone-alt estsupport-contact-icon"></i>
+        <h3 class="estsupport-contact-title">Teléfono</h3>
+        <p class="estsupport-contact-text">+1 (800) 123-4567</p>
+        <a href="tel:+18001234567" class="estsupport-contact-button">
+          <i class="fas fa-phone"></i> Llamar ahora
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="estsupport-faq">
+    <h2 class="estsupport-section-title">Preguntas frecuentes</h2>
+    <div class="estsupport-faq-container">
+      <div class="estsupport-faq-item" *ngFor="let item of faqItems; let i = index">
+        <button class="estsupport-faq-question" (click)="toggleFaq(i)">
+          <span class="question">{{item.question}}</span>
+          <i class="fas fa-chevron-down" [class.rotate]="item.active"></i>
+        </button>
+        <div class="estsupport-faq-answer" [class.active]="item.active">
+          <div [innerHTML]="item.answer"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="estsupport-report">
+    <div class="estsupport-report-card">
+      <h2 class="estsupport-section-title">Reportar un problema</h2>
+      <p class="estsupport-report-text">Si necesitas asistencia técnica con alguno de nuestros cursos, completa el siguiente formulario:</p>
+      <form class="estsupport-report-form" [formGroup]="reportForm" (ngSubmit)="submitReport()">
+        <div class="estsupport-form-group">
+          <label for="estsupport-email" class="estsupport-form-label">Correo electrónico</label>
+          <input type="email" id="estsupport-email" class="estsupport-form-input" formControlName="email" required>
+          <div class="estsupport-error" *ngIf="reportForm.get('email')?.invalid && reportForm.get('email')?.touched">
+            Por favor ingresa un correo válido
+          </div>
+        </div>
+        
+        <div class="estsupport-form-group">
+          <label for="estsupport-username" class="estsupport-form-label">Nombre de usuario</label>
+          <input type="text" id="estsupport-username" class="estsupport-form-input" formControlName="username" required>
+          <div class="estsupport-error" *ngIf="reportForm.get('username')?.invalid && reportForm.get('username')?.touched">
+            Este campo es requerido
+          </div>
+        </div>
+        
+        <div class="estsupport-form-group">
+          <label for="estsupport-course" class="estsupport-form-label">Curso afectado</label>
+          <input type="text" id="estsupport-course" class="estsupport-form-input" formControlName="course" required>
+          <div class="estsupport-error" *ngIf="reportForm.get('course')?.invalid && reportForm.get('course')?.touched">
+            Este campo es requerido
+          </div>
+        </div>
+        
+        <div class="estsupport-form-group">
+          <label for="estsupport-issue" class="estsupport-form-label">Descripción detallada del problema</label>
+          <textarea id="estsupport-issue" class="estsupport-form-textarea" rows="5" formControlName="issue" required></textarea>
+          <div class="estsupport-error" *ngIf="reportForm.get('issue')?.invalid && reportForm.get('issue')?.touched">
+            Por favor describe el problema
+          </div>
+        </div>
+        
+        <button type="submit" class="estsupport-submit-button" [disabled]="reportForm.invalid">
+          <i class="fas fa-paper-plane"></i> Enviar reporte
+        </button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<app-footer></app-footer>
