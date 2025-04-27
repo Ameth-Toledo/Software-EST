@@ -88,3 +88,48 @@
   .button:hover svg path {
     fill: #181717;
   }
+
+  @media screen and (max-width: 480px) {
+    .card-developer {
+      width: 300px;
+      margin: 0 auto;
+    }
+    
+    .image-develop {
+      width: 80px;
+      height: 120px;
+    }
+    
+    .name {
+      font-size: 0.9rem;
+    }
+    
+    .rol {
+      font-size: 0.5rem;
+    }
+
+    .tech-logo {
+      width: 12px;
+      height: 12px;
+    }
+    
+    .button {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .button {
+      width: 200px;
+      height: 35px;
+      gap: 10px;
+    }
+    
+    .button .text {
+        font-size: 0.9em;
+    }
+    
+    .button svg {
+        width: 20px;
+        height: 20px;
+    }
+  }

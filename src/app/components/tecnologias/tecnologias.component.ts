@@ -32,9 +32,9 @@ export class TecnologiasComponent {
     { iconPath: 'assets/icons/react.svg', techName: 'React' },
     { iconPath: 'assets/icons/vercel.svg', techName: 'Vercel' },
     { iconPath: 'assets/icons/nginx.svg', techName: 'Nginx' },
+    { iconPath: 'assets/icons/docker.svg', techName: 'Docker' },
     { iconPath: 'assets/icons/rabbitmq.svg', techName: 'RabbitMQ' },
     { iconPath: 'assets/icons/tailwind.svg', techName: 'Tailwind' },
     { iconPath: 'assets/icons/html.svg', techName: 'HTML' },
-    { iconPath: 'assets/icons/css.svg', techName: 'CSS' }
-  ];
+    { iconPath: 'assets/icons/css.svg', techName: 'CSS' }  ];
 }

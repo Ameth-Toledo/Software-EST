@@ -320,7 +320,7 @@
     .hero {
         padding: 80px 30px 30px 30px;
     }
-    
+
     .hero-title {
         font-size: 2.5rem;
     }
@@ -337,5 +337,50 @@
 
     .cursos-title {
         font-size: 2rem;
+    }
+
+    .banner {
+        padding: 30px 15px;
+    }
+
+    .title-banner {
+        font-size: 1.1rem;
+        text-align: center;
+        width: 190%;
+        text-align: left;
+    }
+
+    .title-banner br {
+        display: none; 
+    }
+
+    .subtitle-banner {
+        font-size: 0.8rem;
+    }
+
+    .btn-comenzar {
+        width: 150px;
+        height: 30px;
+        font-size: 10px;
+    }
+
+    .banner-promo {
+        max-width: 40%;
+    }
+
+    .title-coolaborativo {
+        font-size: 1rem;
+    }
+
+    .github-img {
+        width: 40px;
+    }
+
+    .title-wrapper {
+        margin-bottom: 20px;
+    }
+
+    .developers-title {
+        font-size: 1rem;
     }
 }

@@ -328,3 +328,9 @@
     background-image: url("https://est-software.vercel.app/assets/Logo-EST.svg");
   }
   
+  @media (max-width: 768px) {
+    .card-container {
+      width: 350px;
+      height: 400px;
+    }
+  }
