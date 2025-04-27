@@ -103,50 +103,28 @@
     cursor: pointer;
   }
   
-@media screen and (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     .nav-bar {
-        padding: 8px 15px;
-    }
-    
-    .title {
-        font-size: 20px;
-    }
-    
-    .btn-login {
-        font-size: 14px;
-        padding: 6px 10px;
-    }
-    
-    .btn-login i {
-        font-size: 16px;
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .nav-bar {
-        border-radius: 15px 0 15px 0;
-        padding: 8px 12px;
-        margin-top: 10px;
-    }
-    
-    .logo {
-        height: 30px;
-    }
-    
-    .title {
-        font-size: 18px;
-        margin-left: 5px;
-    }
-    
-    .btn-login {
-        display: none;
-    }
-    
-    .cursos-link {
-        display: none;
-    }
-    
-    .menu-container {
-        display: block;
-    }
+      border-radius: 15px 0 15px 0;
+      padding: 8px 12px;
+      margin-top: 10px;
+      width: 80%;
+  }
+  
+  .logo {
+      height: 30px;
+  }
+  
+  .title {
+      font-size: 18px;
+      margin-left: 5px;
+  }
+  
+  .btn-login {
+      display: none;
+  }
+  
+  .cursos-link {
+      display: none;
+  }
 }
