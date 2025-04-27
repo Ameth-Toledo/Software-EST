@@ -317,6 +317,10 @@
 }
 
 @media (max-width: 767px) {
+    body {
+        overflow-x: hidden; 
+    }
+
     .hero {
         padding: 80px 30px 30px 30px;
     }
