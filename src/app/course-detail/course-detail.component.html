@@ -1,0 +1,58 @@
+<app-header></app-header>
+
+<main class="course-container">
+  <!-- Estado de carga -->
+  <div *ngIf="!course" class="loading-state">
+    <div class="spinner"></div>
+    <p>Cargando detalles del curso...</p>
+  </div>
+
+  <!-- Contenido del curso -->
+  <div *ngIf="course" class="course-detail">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+      <a routerLink="/">Inicio</a> &gt;
+      <a routerLink="/courses">Cursos</a> &gt;
+      <span>{{ course.titulo }}</span>
+    </nav>
+
+    <!-- Cabecera del curso -->
+    <header class="course-header">
+      <h1 class="course-title">{{ course.titulo }}</h1>
+      <div class="course-meta">
+        <span class="course-type" [class.free]="course.es_gratuito" [class.premium]="!course.es_gratuito">
+          {{ course.es_gratuito ? 'Gratis' : 'Premium' }}
+        </span>
+        <span class="course-professor" *ngIf="profesorName">
+          <i class="fas fa-chalkboard-teacher"></i> Profesor: {{ profesorName }}
+        </span>
+      </div>
+    </header>
+
+    <!-- Imagen del curso -->
+    <figure class="course-image-container">
+      <img [src]="'http://localhost:8080' + course.imagen_portada" 
+           [alt]="'Imagen del curso ' + course.titulo" 
+           class="course-image"
+           (error)="handleImageError($event)">
+    </figure>
+
+    <!-- Descripción -->
+    <section class="course-description">
+      <h2>Descripción del curso</h2>
+      <p>{{ course.descripcion }}</p>
+    </section>
+
+    <!-- Acciones -->
+    <div class="course-actions">
+      <button class="btn-enroll" (click)="enrollCourse()">
+        {{ course.es_gratuito ? 'Comenzar curso' : 'Inscribirse' }}
+      </button>
+      <button class="btn-share" (click)="shareCourse()">
+        <i class="fas fa-share-alt"></i> Compartir
+      </button>
+    </div>
+  </div>
+</main>
+
+<app-footer></app-footer>

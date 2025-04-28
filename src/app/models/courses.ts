@@ -7,3 +7,7 @@ export interface Courses {
     es_gratuito: boolean;  // No es opcional
   }
   
+  export interface CourseApiResponse {
+    course: Omit<Courses, 'imagen_portada'> & { imagen_portada: string };
+    message?: string;
+  }

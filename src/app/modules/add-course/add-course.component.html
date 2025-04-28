@@ -14,7 +14,7 @@
       
       <form [formGroup]="courseForm" (ngSubmit)="onSubmit()" class="course-form">
         <!-- Grupo de Título -->
-        <div class="form-group floating">
+        <div class="form-group title-group floating">
           <input 
             type="text" 
             id="titulo" 
@@ -29,7 +29,7 @@
         </div>
 
         <!-- Grupo de Descripción -->
-        <div class="form-group floating">
+        <div class="form-group description-group floating">
           <textarea 
             id="descripcion" 
             formControlName="descripcion" 
@@ -44,31 +44,28 @@
         </div>
 
         <!-- Grupo de Imagen -->
-        <div class="form-group file-upload">
+        <div class="form-group image-upload-group">
           <label class="file-upload-label">
-            <input type="file" id="imagen_portada" (change)="onFileSelected($event)" accept="image/*">
+            <input 
+              type="file" 
+              id="imagen_portada" 
+              (change)="onFileSelected($event)" 
+              accept="image/png, image/jpeg, image/jpg, image/svg+xml"
+              required
+            >
             <span class="file-upload-button">
-              <i class="fas fa-cloud-upload-alt"></i> Seleccionar imagen
+              <i class="fas fa-cloud-upload-alt"></i> Seleccionar imagen (PNG, JPG, SVG)
             </span>
             <span class="file-name" *ngIf="selectedFile">
-              {{ selectedFile.name }}
+              {{ selectedFile.name }} ({{ (selectedFile.size / 1024).toFixed(2) }} KB)
             </span>
             <span class="file-name" *ngIf="!selectedFile">
               Ningún archivo seleccionado
             </span>
           </label>
           <div *ngIf="courseForm.get('imagen_portada')?.invalid && courseForm.get('imagen_portada')?.touched" class="error-message">
-            <i class="fas fa-exclamation-circle"></i> La imagen es requerida
+            <i class="fas fa-exclamation-circle"></i> La imagen es requerida (formatos: PNG, JPG, SVG, máximo 5MB)
           </div>
-        </div>
-
-        <!-- Grupo Checkbox -->
-        <div class="form-group checkbox-group">
-          <label class="checkbox-container">
-            <input type="checkbox" id="es_gratuito" formControlName="es_gratuito">
-            <span class="checkmark"></span>
-            <span class="checkbox-label">Curso Gratuito</span>
-          </label>
         </div>
 
         <!-- Mensaje de error -->
@@ -99,9 +96,6 @@
       <div class="course-preview">
         <div class="preview-image">
           <img [src]="imagePreview || 'assets/default-course.jpg'" alt="Vista previa del curso">
-          <div class="preview-badge" *ngIf="courseForm.get('es_gratuito')?.value">
-            GRATIS
-          </div>
         </div>
         <div class="preview-content">
           <h4>{{ courseForm.get('titulo')?.value || 'Título del curso' }}</h4>
@@ -118,7 +112,7 @@
           <li>Usa un título claro y descriptivo</li>
           <li>Incluye una imagen atractiva</li>
           <li>Describe bien los contenidos</li>
-          <li>Marca como gratuito si es apropiado</li>
+          <li>Se específico sobre lo que aprenderán</li>
         </ul>
       </div>
     </div>
