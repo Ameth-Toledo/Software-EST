@@ -16,11 +16,11 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   showPassword: boolean = false;
-  loginData: Login = { email: '', password: '' };  
+  loginData: Login = { email: '', password: '' };
 
   constructor(
     private loginService: LoginService,
-    private authService: AuthService,  
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -31,18 +31,31 @@ export class LoginComponent {
   onSubmit(): void {
     this.loginService.login(this.loginData).subscribe(
       (response) => {
-        localStorage.setItem('authToken', response.token);  
-        this.authService.loginAndRedirect();  // Usar el nuevo método
+        console.log('Datos recibidos para login:', response);  // Verifica la respuesta
+  
+        // Ahora comprobamos que 'token' y 'userId' existan
+        if (response.token && response.userId) {
+          // Guardamos el token y los datos del usuario
+          this.authService.login({
+            token: response.token,
+            user: { id: response.userId, name: response.name, email: response.email }
+          });
+  
+          // Redirige al home después del login
+          this.router.navigate(['/home']);
+        } else {
+          console.error('Token o userId no están presentes en la respuesta.');
+        }
       },
       (error) => {
         console.error('Login failed:', error);
       }
     );
-  }
+  }  
 
-  sendToRegister(event : Event) {
+  sendToRegister(event: Event): void {
     event.preventDefault();
-    this.router.navigate(['register'])
+    this.router.navigate(['register']);
   }
 
   loginWithFacebook(): void {
@@ -52,8 +65,8 @@ export class LoginComponent {
   loginWithGitHub(): void {
     window.location.href = 'http://localhost:8080/auth/github/register';
   }
-  
+
   loginWithGoogle(): void {
     window.location.href = 'http://localhost:8080/auth/google/register';
-  }  
+  }
 }

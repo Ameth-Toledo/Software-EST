@@ -8,7 +8,8 @@ import { AuthCallbackComponent } from './modules/auth-callback/auth-callback.com
 import { NotfoundComponent } from './modules/notfound/notfound.component';
 import { AddCourseComponent } from './modules/add-course/add-course.component';
 import { SoporteTecnicoComponent } from './modules/soporte-tecnico/soporte-tecnico.component';
-import { CourseDetailComponent } from './course-detail/course-detail.component';
+import { CourseDetailComponent } from './modules/course-detail/course-detail.component';
+import { AdminDashboardComponent } from './modules/admin-dashboard/admin-dashboard.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '', pathMatch: 'full' },
@@ -21,5 +22,6 @@ export const routes: Routes = [
     { path: 'add/course', component: AddCourseComponent },
     { path: 'soporte/tecnico', component: SoporteTecnicoComponent },
     { path: 'course/:id', component: CourseDetailComponent },
+    { path: 'admin/dashboard', component: AdminDashboardComponent },
     { path: '**', component: NotfoundComponent }
 ];

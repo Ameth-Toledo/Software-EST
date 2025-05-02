@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { CoursesService } from '../services/courses/courses.service';
-import { Courses } from '../models/courses';
+import { CoursesService } from '../../services/courses/courses.service';
+import { Courses } from '../../models/courses';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from "../components/footer/footer.component";
-import { HeaderComponent } from "../components/header/header.component";
+import { FooterComponent } from '../../components/footer/footer.component';
+import { HeaderComponent } from '../../components/header/header.component';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-course-detail',

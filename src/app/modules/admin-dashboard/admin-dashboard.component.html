@@ -1,0 +1,274 @@
+<app-header></app-header>
+
+<div class="admin-container">
+  <div class="admin-content">
+    <!-- Menú lateral -->
+    <div class="admin-menu">
+      <button class="menu-btn" [class.active]="activeTab === 'cursos'" (click)="setActiveTab('cursos')">
+        <i class="fas fa-book"></i> <span class="btn-text">Cursos</span>
+      </button>
+      <button class="menu-btn" [class.active]="activeTab === 'estudiantes'" (click)="setActiveTab('estudiantes')">
+        <i class="fas fa-users"></i> <span class="btn-text">Estudiantes</span>
+      </button>
+      <button class="menu-btn" [class.active]="activeTab === 'profesores'" (click)="setActiveTab('profesores')">
+        <i class="fas fa-chalkboard-teacher"></i> <span class="btn-text">Profesores</span>
+      </button>
+      <button class="menu-btn" [class.active]="activeTab === 'asignaciones'" (click)="setActiveTab('asignaciones')">
+        <i class="fas fa-tasks"></i> <span class="btn-text">Asignaciones</span>
+      </button>
+      <button class="menu-btn" [class.active]="activeTab === 'comentarios'" (click)="setActiveTab('comentarios')">
+        <i class="fas fa-comments"></i> <span class="btn-text">Comentarios</span>
+      </button>
+      <button class="menu-btn" [class.active]="activeTab === 'inscripciones'" (click)="setActiveTab('inscripciones')">
+        <i class="fas fa-clipboard-list"></i> <span class="btn-text">Inscripciones</span>
+      </button>
+    </div>
+
+    <!-- Área de contenido principal -->
+    <div class="main-content">
+     <!-- SECCIÓN DE CURSOS -->
+        <div *ngIf="activeTab === 'cursos'" class="content-section">
+            <div class="section-header">
+            <h2><i class="fas fa-book"></i> Gestión de Cursos</h2>
+            <button class="action-btn primary" (click)="openAddModal('curso')">
+                <i class="fas fa-plus"></i> Nuevo Curso
+            </button>
+            </div>
+            
+            <div class="data-table">
+            <table>
+                <thead>
+                <tr>
+                    <th>Portada</th>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>Profesor ID</th>
+                    <th>Tipo</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let curso of cursos">
+                    <td>
+                        <img [src]="'http://localhost:8080' + curso.imagen_portada" 
+                        alt="Portada del curso" 
+                        class="course-cover">
+                    </td>
+                    <td>{{curso.titulo}}</td>
+                    <td>{{curso.descripcion}}</td>
+                    <td>{{curso.profesor_id}}</td>
+                    <td>
+                    <span class="badge" [class.free]="curso.es_gratuito">
+                        {{curso.es_gratuito ? 'Gratuito' : 'Premium'}}
+                    </span>
+                    </td>
+                    <td class="actions">
+                    <button class="icon-btn edit" (click)="editItem(curso, 'curso')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="icon-btn delete" (click)="deleteItem(curso.id, 'curso')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+        <div *ngIf="activeTab === 'estudiantes'" class="content-section">
+            <div class="section-header">
+              <h2><i class="fas fa-chalkboard-teacher"></i> Gestión de Estudiantes</h2>
+              <button class="action-btn primary" (click)="openAddModal('profesor')">
+                <i class="fas fa-plus"></i> Nuevo Estudiante
+              </button>
+            </div>
+            
+            <div class="data-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Especialidad</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let profesor of profesores">
+                    <td>{{profesor.id}}</td>
+                    <td>{{profesor.nombre}}</td>
+                    <td>{{profesor.especialidad}}</td>
+                    <td>{{profesor.email}}</td>
+                    <td class="actions">
+                      <button class="icon-btn edit" (click)="editItem(profesor, 'profesor')"><i class="fas fa-edit"></i></button>
+                      <button class="icon-btn delete" (click)="deleteItem(profesor.id, 'profesor')"><i class="fas fa-trash"></i></button>
+                      <button class="icon-btn assignments" (click)="viewAssignments(profesor.id)"><i class="fas fa-tasks"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+      <!-- SECCIÓN DE PROFESORES -->
+      <div *ngIf="activeTab === 'profesores'" class="content-section">
+        <div class="section-header">
+          <h2><i class="fas fa-chalkboard-teacher"></i> Gestión de Profesores</h2>
+          <button class="action-btn primary" (click)="openAddModal('profesor')">
+            <i class="fas fa-plus"></i> Nuevo Profesor
+          </button>
+        </div>
+        
+        <div class="data-table">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Especialidad</th>
+                <th>Email</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let profesor of profesores">
+                <td>{{profesor.id}}</td>
+                <td>{{profesor.nombre}}</td>
+                <td>{{profesor.especialidad}}</td>
+                <td>{{profesor.email}}</td>
+                <td class="actions">
+                  <button class="icon-btn edit" (click)="editItem(profesor, 'profesor')"><i class="fas fa-edit"></i></button>
+                  <button class="icon-btn delete" (click)="deleteItem(profesor.id, 'profesor')"><i class="fas fa-trash"></i></button>
+                  <button class="icon-btn assignments" (click)="viewAssignments(profesor.id)"><i class="fas fa-tasks"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SECCIÓN DE ASIGNACIONES -->
+      <div *ngIf="activeTab === 'asignaciones'" class="content-section">
+        <div class="section-header">
+          <h2><i class="fas fa-tasks"></i> Asignaciones de Profesores</h2>
+        </div>
+        
+        <div class="data-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Profesor</th>
+                <th>Materias que imparte</th>
+                <th>Cursos asignados</th>
+                <th>Horas semanales</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let asignacion of asignaciones">
+                <td>
+                  <div class="professor-info">
+                    <img [src]="asignacion.avatar || 'assets/default-avatar.png'" alt="Profesor" class="professor-avatar">
+                    <span>{{asignacion.nombre}}</span>
+                  </div>
+                </td>
+                <td>{{asignacion.materias}}</td>
+                <td>{{asignacion.cursos}} cursos</td>
+                <td>{{asignacion.horas}} horas</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SECCIÓN DE COMENTARIOS -->
+      <div *ngIf="activeTab === 'comentarios'" class="content-section">
+        <div class="section-header">
+          <h2><i class="fas fa-comments"></i> Moderación de Comentarios</h2>
+        </div>
+        
+        <div class="comments-list">
+          <div class="comment-card" *ngFor="let comentario of comentarios">
+            <div class="comment-header">
+              <img [src]="comentario.avatar || 'assets/default-avatar.png'" alt="Estudiante" class="comment-avatar">
+              <div>
+                <h4>{{comentario.estudiante}}</h4>
+                <span class="comment-date">{{comentario.fecha | date:'dd/MM/yyyy'}}</span>
+                <span class="comment-course">Curso: {{comentario.curso}}</span>
+              </div>
+              <button class="icon-btn delete" (click)="deleteComment(comentario.id)"><i class="fas fa-trash"></i></button>
+            </div>
+            <div class="comment-content">
+              <p>{{comentario.contenido}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN DE INSCRIPCIONES -->
+      <div *ngIf="activeTab === 'inscripciones'" class="content-section">
+        <div class="section-header">
+          <h2><i class="fas fa-clipboard-list"></i> Inscripciones</h2>
+        </div>
+        
+        <div class="data-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Estudiante</th>
+                <th>Curso</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let inscripcion of inscripciones">
+                <td>
+                  <div class="student-info">
+                    <img [src]="inscripcion.avatar || 'assets/default-avatar.png'" alt="Estudiante" class="student-avatar">
+                    <span>{{inscripcion.estudiante}}</span>
+                  </div>
+                </td>
+                <td>{{inscripcion.curso}}</td>
+                <td>{{inscripcion.fecha | date:'dd/MM/yyyy'}}</td>
+                <td>
+                  <span class="status-badge" [class.approved]="inscripcion.estado === 'Aprobada'" 
+                    [class.pending]="inscripcion.estado === 'Pendiente'">
+                    {{inscripcion.estado}}
+                  </span>
+                </td>
+                <td class="actions">
+                  <button class="icon-btn edit" (click)="editInscription(inscripcion)"><i class="fas fa-edit"></i></button>
+                  <button class="icon-btn cancel" (click)="cancelInscription(inscripcion.id)"><i class="fas fa-times"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para agregar/editar -->
+<div class="modal" *ngIf="showModal">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h3>{{modalTitle}}</h3>
+    <form [formGroup]="form" (ngSubmit)="submitForm()">
+      <!-- Los campos del formulario se cargarán dinámicamente según el tipo -->
+      <div class="form-group" *ngFor="let field of formFields">
+        <label>{{field.label}}</label>
+        <input [type]="field.type" [formControlName]="field.name" [placeholder]="field.placeholder">
+      </div>
+      <div class="form-actions">
+        <button type="button" class="action-btn cancel" (click)="closeModal()">Cancelar</button>
+        <button type="submit" class="action-btn primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-footer></app-footer>

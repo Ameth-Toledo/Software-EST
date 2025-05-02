@@ -72,10 +72,13 @@ export class CoursesService {
 
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('authToken');
-    return new HttpHeaders({
+    console.log('TOKEN ENVIADO:', token);  // Verifica que el token sea correcto
+    const headers = new HttpHeaders({
       'Authorization': token ? `Bearer ${token}` : ''
     });
-  }
+    console.log('Cabeceras de autorización:', headers);  // Muestra las cabeceras
+    return headers;
+  }  
 
   private handleError(error: any): Observable<never> {
     let errorMessage = 'Error al procesar la solicitud';
@@ -85,5 +88,21 @@ export class CoursesService {
       errorMessage = 'Error de conexión con el servidor';
     }
     return throwError(() => new Error(errorMessage));
+  }
+
+  updateCourse(id: number, courseData: FormData): Observable<CourseApiResponse> {
+    return this.http.put<CourseApiResponse>(`${this.apiUrl}/${id}`, courseData, { 
+      headers: this.getAuthHeaders() 
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteCourse(id: number): Observable<{message: string}> {
+    return this.http.delete<{message: string}>(`${this.apiUrl}/${id}`, { 
+      headers: this.getAuthHeaders() 
+    }).pipe(
+      catchError(this.handleError)
+    );
   }
 }

@@ -37,26 +37,25 @@ export class AuthService {
   }
 
   login(userData: any = {}): void {
+    console.log('Datos recibidos para login:', userData); // 👈🏼 Agrega esto
+  
     localStorage.setItem('isAuthenticated', 'true');
-    
-    // Si se proporciona un token, guardarlo
+  
     if (userData.token) {
       localStorage.setItem('authToken', userData.token);
     }
-    
-    // Si se proporcionan datos de usuario, guardarlos
+  
     if (userData.user) {
       localStorage.setItem('userData', JSON.stringify(userData.user));
       this.currentUserSubject.next(userData.user);
     } else if (Object.keys(userData).length > 0 && !userData.token) {
-      // Si userData no tiene una propiedad 'user' pero tiene otros datos
       localStorage.setItem('userData', JSON.stringify(userData));
       this.currentUserSubject.next(userData);
     }
-    
+  
     this.isAuthenticated.next(true);
   }
-
+  
   loginAndRedirect(userData: any = {}, redirectUrl: string = '/home'): void {
     this.login(userData);
     this.router.navigate([redirectUrl]);
