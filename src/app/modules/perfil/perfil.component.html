@@ -158,3 +158,42 @@
     </div>
   </div>
 </div>
+
+<!-- Modal de Éxito -->
+<div class="modal-overlay" *ngIf="showSuccessModal">
+  <div class="modal-exito">
+    <div class="modal-icon success">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <h1 class="title-modal">Perfil actualizado con éxito</h1>
+    <p class="modal-message">{{ successMessage }}</p>
+    <button class="btn-modal" (click)="closeSuccessModal()">Aceptar</button>
+  </div>
+</div>
+
+<!-- Modal de Advertencia -->
+<div class="modal-overlay" *ngIf="showWarningModal">
+  <div class="modal-exito warning">
+    <div class="modal-icon warning">
+      <i class="fas fa-exclamation-triangle"></i>
+    </div>
+    <h1 class="title-modal">Advertencia</h1>
+    <p class="modal-message">{{ warningMessage }}</p>
+    <div class="modal-buttons">
+      <button class="btn-modal btn-cancel" (click)="closeWarningModal()">Cancelar</button>
+      <button class="btn-modal btn-confirm" (click)="confirmWarningAction()">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Error -->
+<div class="modal-overlay" *ngIf="showErrorModal">
+  <div class="modal-exito error">
+    <div class="modal-icon error">
+      <i class="fas fa-times-circle"></i>
+    </div>
+    <h1 class="title-modal">Error</h1>
+    <p class="modal-message">{{ errorMessage }}</p>
+    <button class="btn-modal" (click)="closeErrorModal()">Aceptar</button>
+  </div>
+</div>

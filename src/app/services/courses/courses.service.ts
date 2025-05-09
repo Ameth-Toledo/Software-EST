@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, map, throwError } from 'rxjs'; // Agregamos map aquí
+import { Observable, catchError, map, throwError, BehaviorSubject } from 'rxjs'; 
 import { Courses, CourseApiResponse } from '../../models/courses';
 
 interface ApiResponse {
@@ -12,6 +12,8 @@ interface ApiResponse {
 })
 export class CoursesService {
   private apiUrl = 'http://localhost:8080/courses';
+  private searchResults = new BehaviorSubject<Courses[]>([]);
+  searchResults$ = this.searchResults.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -102,6 +104,14 @@ export class CoursesService {
     return this.http.delete<{message: string}>(`${this.apiUrl}/${id}`, { 
       headers: this.getAuthHeaders() 
     }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  searchCoursesByName(name: string): Observable<Courses[]> {
+    const headers = this.getAuthHeaders();
+    return this.http.get<{courses: Courses[]}>(`${this.apiUrl}/name/${name}`, { headers }).pipe(
+      map(response => response.courses),
       catchError(this.handleError)
     );
   }

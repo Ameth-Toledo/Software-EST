@@ -1,6 +1,6 @@
 .card-curso {
     width: 100%;
-    max-width: 400px;
+    max-width: 300px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -12,7 +12,7 @@
 
 .curso-imagen {
     width: 100%;
-    height: 200px;
+    height: 150px;
     object-fit: cover;
     border-radius: 6px;
     margin-bottom: 15px;
@@ -24,14 +24,14 @@
     left: 15px;
     background-color: #e5f1ff;
     color: #0056b3;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     padding: 5px 12px;
     border-radius: 15px;
 }
 
 .curso-titulo {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 700;
     color: #333;
     margin: 10px 0;
@@ -39,14 +39,14 @@
 
 .curso-descripcion {
     color: #666;
-    font-size: 16px;
+    font-size: 14px;
     margin-bottom: 20px;
     line-height: 1.4;
 }
 
 .curso-button {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 10px 100px;
     background-color: transparent;
     border: 2px solid #0056b3;
     color: #0056b3;
@@ -56,6 +56,7 @@
     text-align: center;
     transition: all 0.3s ease;
     width: fit-content;
+    margin: 0 auto;
 }
 
 .curso-button:hover {
@@ -78,17 +79,6 @@
 .curso-rating {
     display: flex;
     align-items: center;
-}
-
-.stars {
-    color: #ffd700;
-    margin-right: 5px;
-    font-size: 16px;
-}
-
-.star-container {
-    position: relative;
-    display: inline-block;
 }
 
 .rating-value {

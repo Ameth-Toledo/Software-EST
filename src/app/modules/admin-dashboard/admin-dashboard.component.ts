@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FooterComponent } from "../../components/footer/footer.component";
 import { HeaderComponent } from "../../components/header/header.component";
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CoursesService } from '../../services/courses/courses.service';
@@ -10,7 +11,7 @@ import { Courses } from '../../models/courses';
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FooterComponent, HeaderComponent],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, FooterComponent, HeaderComponent],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss'
 })
@@ -24,7 +25,10 @@ export class AdminDashboardComponent implements OnInit{
   currentCourseId: number | null = null;
   currentModuleId!: string;
   currentLessonId!: string;
-  currentProfessorId!: string; // Si también editas profesores
+  currentProfessorId!: string; 
+  searchTerm: string = '';
+  isSearching: boolean = false;
+  showAllCourses: boolean = true;
   // Datos de ejemplo
   cursos: Courses[] = [];
 
@@ -62,6 +66,7 @@ export class AdminDashboardComponent implements OnInit{
 
   ngOnInit(): void {
     this.loadCourses();
+    this.setupSearch()
   }
 
   loadCourses(): void {
@@ -221,4 +226,41 @@ export class AdminDashboardComponent implements OnInit{
   editInscription(inscripcion: any): void {
     console.log('Editar inscripción:', inscripcion);
   }
+
+  setupSearch(): void {
+    this.coursesService.searchResults$.subscribe(results => {
+      this.cursos = results;
+      this.isSearching = false;
+    });
+  }
+
+  onSearchInput(): void {
+    if (this.searchTerm.trim() === '') {
+      this.showAllCourses = true;
+      this.loadCourses();
+      return;
+    }
+
+    this.isSearching = true;
+    this.showAllCourses = false;
+    
+    this.coursesService.searchCoursesByName(this.searchTerm).subscribe({
+      next: (courses) => {
+        this.cursos = courses;
+        this.isSearching = false;
+      },
+      error: (err) => {
+        console.error('Error en la búsqueda:', err);
+        this.isSearching = false;
+      }
+    });
+  }
+
+  // En admin-dashboard.component.ts
+onFileChange(event: any, fieldName: string): void {
+  if (event.target.files.length > 0) {
+    const file = event.target.files[0];
+    this.form.get(fieldName)?.setValue(file);
+  }
+}
 }

@@ -27,13 +27,24 @@
     <!-- Área de contenido principal -->
     <div class="main-content">
      <!-- SECCIÓN DE CURSOS -->
-        <div *ngIf="activeTab === 'cursos'" class="content-section">
-            <div class="section-header">
+      <div *ngIf="activeTab === 'cursos'" class="content-section">
+        <div class="section-header">
             <h2><i class="fas fa-book"></i> Gestión de Cursos</h2>
+            <div class="search-container">
+                <input type="text" 
+                      [(ngModel)]="searchTerm" 
+                      (input)="onSearchInput()" 
+                      placeholder="Buscar cursos por nombre..."
+                      class="search-input">
+                <i class="fas fa-search search-icon"></i>
+                <div *ngIf="isSearching" class="search-loading">
+                    <i class="fas fa-spinner fa-spin"></i> Buscando...
+                </div>
+            </div>
             <button class="action-btn primary" (click)="openAddModal('curso')">
                 <i class="fas fa-plus"></i> Nuevo Curso
             </button>
-            </div>
+        </div>
             
             <div class="data-table">
             <table>
@@ -253,21 +264,65 @@
 </div>
 
 <!-- Modal para agregar/editar -->
-<div class="modal" *ngIf="showModal">
-  <div class="modal-content">
-    <span class="close" (click)="closeModal()">&times;</span>
-    <h3>{{modalTitle}}</h3>
-    <form [formGroup]="form" (ngSubmit)="submitForm()">
-      <!-- Los campos del formulario se cargarán dinámicamente según el tipo -->
-      <div class="form-group" *ngFor="let field of formFields">
-        <label>{{field.label}}</label>
-        <input [type]="field.type" [formControlName]="field.name" [placeholder]="field.placeholder">
-      </div>
-      <div class="form-actions">
-        <button type="button" class="action-btn cancel" (click)="closeModal()">Cancelar</button>
-        <button type="submit" class="action-btn primary">Guardar</button>
-      </div>
-    </form>
+<div class="modal" *ngIf="showModal" [class.active]="showModal">
+  <div class="modal-overlay" (click)="closeModal()"></div>
+  <div class="modal-container">
+    <div class="modal-header">
+      <h3 class="modal-title">{{modalTitle}}</h3>
+      <button class="modal-close" (click)="closeModal()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <form [formGroup]="form" (ngSubmit)="submitForm()">
+        <div class="form-grid">
+          <div class="form-group" *ngFor="let field of formFields">
+            <label class="form-label">{{field.label}}<span *ngIf="field.required">*</span></label>
+            
+            <div class="form-control-container">
+              <input *ngIf="field.type !== 'textarea' && field.type !== 'file' && field.type !== 'checkbox'" 
+                     [type]="field.type" 
+                     [formControlName]="field.name" 
+                     [placeholder]="field.placeholder"
+                     class="form-control">
+                     
+              <textarea *ngIf="field.type === 'textarea'" 
+                        [formControlName]="field.name" 
+                        [placeholder]="field.placeholder"
+                        class="form-control textarea-control"
+                        rows="4"></textarea>
+                        
+              <input *ngIf="field.type === 'file'"
+                     type="file"
+                     (change)="onFileChange($event, field.name)"
+                     class="form-control file-input">
+                     
+              <label *ngIf="field.type === 'checkbox'" class="checkbox-label">
+                <input type="checkbox" [formControlName]="field.name">
+                <span class="checkbox-custom"></span>
+                {{field.placeholder}}
+              </label>
+            </div>
+            
+            <!-- CORRECCIÓN: Paréntesis faltante añadido aquí -->
+            <div *ngIf="form.get(field.name)?.invalid && (form.get(field.name)?.dirty || form.get(field.name)?.touched)" 
+                 class="form-error">
+              <span *ngIf="form.get(field.name)?.errors?.['required']">Este campo es requerido</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="modal-btn cancel" (click)="closeModal()">
+            Cancelar
+          </button>
+          <button type="submit" class="modal-btn primary" [disabled]="form.invalid">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 

@@ -23,12 +23,24 @@ export class PerfilComponent implements OnInit {
     planPremium: false
   };
 
+  // Estados del componente
   editMode = false;
   loading = true;
-  imagenUrlBase = 'http://localhost:8080';
-  selectedFile?: File;
-
   
+  // Para manejo de archivos
+  selectedFile?: File;
+  imagenUrlBase = 'http://localhost:8080';
+  
+  // Para los modales
+  showSuccessModal = false;
+  showWarningModal = false;
+  showErrorModal = false;
+  successMessage = '';
+  warningMessage = '';
+  errorMessage = '';
+  warningAction: () => void = () => {};
+  
+  // Frase del día
   fechaInicio: Date = new Date(); 
   fraseDelDia: string = '';
   frasesDelDia: string[] = [
@@ -71,7 +83,10 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarUsuario();
+    this.setFraseDelDia();
+  }
 
+  private setFraseDelDia(): void {
     const hoy = new Date();
     const msPorDia = 1000 * 60 * 60 * 24;
     const diasDesdeInicio = Math.floor((hoy.getTime() - this.fechaInicio.getTime()) / msPorDia);
@@ -81,12 +96,10 @@ export class PerfilComponent implements OnInit {
 
   private getUserIdFromToken(): number | null {
     const token = localStorage.getItem('authToken');
-    console.log('Token obtenido:', token);
     if (!token) return null;
 
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
-      console.log('Payload decodificado:', payload);
       return payload['userId'] || payload['user_id'] || payload['id'] || null;
     } catch (error) {
       console.error('Error decodificando token:', error);
@@ -98,16 +111,14 @@ export class PerfilComponent implements OnInit {
     let id = this.getUserIdFromToken();
 
     if (id == null) {
-      console.error('No se pudo obtener ID del token');
+      this.openErrorModal('No se pudo obtener tu información de sesión');
       this.router.navigate(['/login']); 
       return;
     }    
 
     this.loading = true;
-    console.log('Cargando usuario con ID:', id);
     this.usersService.getUserById(id).subscribe({
       next: (response: any) => {
-        console.log('Respuesta al cargar usuario:', response);
         let userData;
         if (response.client) {
           userData = response.client;
@@ -130,22 +141,19 @@ export class PerfilComponent implements OnInit {
             rolId: userData.rolId || userData.rol_id || 1,
             contrasena: '' 
           };
-
-          console.log('Usuario cargado con rolId:', this.usuario.rolId);
         }
         this.loading = false;
-        console.log('Usuario cargado:', this.usuario);
       },
       error: err => {
         console.error('Error al cargar usuario:', err);
         this.loading = false;
+        this.openErrorModal('No se pudo cargar la información del usuario');
       }
     });
   }
 
   toggleEditMode(): void {
     this.editMode = !this.editMode;
-    console.log('Modo de edición:', this.editMode);
     if (!this.editMode) {
       this.cargarUsuario();
       this.selectedFile = undefined;
@@ -154,8 +162,21 @@ export class PerfilComponent implements OnInit {
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
-    console.log('Archivo seleccionado:', file);
     if (file) {
+      // Validar tipo y tamaño de archivo
+      const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      const maxSize = 5 * 1024 * 1024; // 5MB
+      
+      if (!validTypes.includes(file.type)) {
+        this.openErrorModal('Formato de archivo no válido. Solo se permiten imágenes JPEG, PNG o GIF.');
+        return;
+      }
+      
+      if (file.size > maxSize) {
+        this.openErrorModal('El archivo es demasiado grande. El tamaño máximo permitido es 5MB.');
+        return;
+      }
+      
       this.selectedFile = file;
       
       const reader = new FileReader();
@@ -179,47 +200,73 @@ export class PerfilComponent implements OnInit {
       formData.append('foto_perfil', this.selectedFile, this.selectedFile.name);
     }
     
-    console.log('FormData enviado:');
-    formData.forEach((value, key) => {
-      console.log(`${key}: ${value instanceof File ? 'File' : value}`);
-    });
-    
     if (this.usuario.id !== undefined) {
-      console.log(`Actualizando usuario ${this.usuario.id}`);
       this.usersService.updateUser(this.usuario.id, formData).subscribe({
         next: (response) => {
-          console.log('Perfil actualizado con éxito:', response);
           this.editMode = false;
           this.cargarUsuario();
-          alert('Perfil actualizado correctamente');
+          this.openSuccessModal('Tus cambios se han guardado correctamente.');
         },
         error: (err) => {
-          console.error('Error detallado al actualizar perfil:', err);
-          
-          if (err.error && err.error.error) {
-            alert(`Error: ${err.error.error}`);
-          } else {
-            alert('Error al actualizar perfil. Inténtalo de nuevo.');
-          }
+          const errorMsg = err.error?.error || 'Error al actualizar perfil. Inténtalo de nuevo.';
+          this.openErrorModal(errorMsg);
         }
       });
     } else {
-      console.error('ID de usuario no definido');
-      alert('ID de usuario no válido');
+      this.openErrorModal('ID de usuario no válido');
     }
   }
 
   eliminarCuenta(): void {
     if (!this.usuario.id) return;
 
-    if (confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.')) {
-      this.usersService.deleteUser(this.usuario.id).subscribe({
-        next: () => {
-          localStorage.removeItem('authToken');
-          this.router.navigate(['/login']);
-        },
-        error: err => console.error('Error al eliminar usuario', err)
-      });
-    }
+    this.openWarningModal(
+      '¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.',
+      () => {
+        this.usersService.deleteUser(this.usuario.id!).subscribe({
+          next: () => {
+            localStorage.removeItem('authToken');
+            this.router.navigate(['/login']);
+          },
+          error: err => {
+            this.openErrorModal('No se pudo eliminar la cuenta. Inténtalo de nuevo.');
+          }
+        });
+      }
+    );
+  }
+
+  // Métodos para manejar los modales
+  openSuccessModal(message: string): void {
+    this.successMessage = message;
+    this.showSuccessModal = true;
+  }
+
+  closeSuccessModal(): void {
+    this.showSuccessModal = false;
+  }
+
+  openWarningModal(message: string, action: () => void): void {
+    this.warningMessage = message;
+    this.warningAction = action;
+    this.showWarningModal = true;
+  }
+
+  closeWarningModal(): void {
+    this.showWarningModal = false;
+  }
+
+  confirmWarningAction(): void {
+    this.warningAction();
+    this.closeWarningModal();
+  }
+
+  openErrorModal(message: string): void {
+    this.errorMessage = message;
+    this.showErrorModal = true;
+  }
+
+  closeErrorModal(): void {
+    this.showErrorModal = false;
   }
 }
