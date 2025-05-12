@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CoursesService } from '../../services/courses/courses.service';
 import { Courses } from '../../models/courses';
+import { UsersService } from '../../services/users/users.service';
+import { user } from '../../models/user';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -15,7 +17,7 @@ import { Courses } from '../../models/courses';
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss'
 })
-export class AdminDashboardComponent implements OnInit{
+export class AdminDashboardComponent implements OnInit {
   activeTab: string = 'cursos';
   showModal: boolean = false;
   modalTitle: string = '';
@@ -31,11 +33,7 @@ export class AdminDashboardComponent implements OnInit{
   showAllCourses: boolean = true;
   // Datos de ejemplo
   cursos: Courses[] = [];
-
-  estudiantes = [
-    { id: 'EST1001', nombre: 'Ana López', email: 'ana.lopez@email.com', cursosInscritos: 3, avatar: 'assets/student1.jpg' },
-    { id: 'EST1002', nombre: 'Carlos Méndez', email: 'carlos.mendez@email.com', cursosInscritos: 2, avatar: 'assets/student2.jpg' }
-  ];
+  estudiantes: user[] = [];
 
   profesores = [
     { id: 'PROF201', nombre: 'María Rodríguez', especialidad: 'Frontend Development', email: 'm.rodriguez@est-software.edu' },
@@ -59,14 +57,16 @@ export class AdminDashboardComponent implements OnInit{
 
   constructor(
     private fb: FormBuilder,
-    private coursesService: CoursesService
+    private coursesService: CoursesService,
+    private usersService: UsersService
   ) {
     this.form = this.fb.group({});
   }
 
   ngOnInit(): void {
     this.loadCourses();
-    this.setupSearch()
+    this.loadEstudiantes();
+    this.setupSearch();
   }
 
   loadCourses(): void {
@@ -80,6 +80,17 @@ export class AdminDashboardComponent implements OnInit{
       }
     });
   }
+
+  loadEstudiantes(): void {
+  this.usersService.getUsersByRole(1).subscribe({
+    next: (response) => {
+      this.estudiantes = response.users; // Accede a la propiedad 'users'
+    },
+    error: (err) => {
+      console.error('Error al cargar estudiantes:', err);
+    }
+  });
+}
 
   setActiveTab(tab: string): void {
     this.activeTab = tab;
@@ -96,29 +107,26 @@ export class AdminDashboardComponent implements OnInit{
     this.currentItemType = type;
     this.modalTitle = `Editar ${this.getTypeName(type)}`;
     this.prepareForm(type, item);
-  
-    switch (type) {
-      case 'curso':
-        this.currentCourseId = item.id;
-        break;
-      case 'modulo':
-        this.currentModuleId = item.id;
-        break;
-      case 'leccion':
-        this.currentLessonId = item.id;
-        break;
-      // Agrega más casos según sea necesario
+
+    if (type === 'estudiante') {
+      // Cargar los datos del estudiante en el formulario, incluyendo el ID
+      this.form.patchValue({
+        id: item.id,
+        nombre: item.nombre,
+        apellido: item.apellido,
+        correo: item.correo,
+        plan: item.plan,
+      });
     }
-  
+
     this.showModal = true;
   }
-  
 
   prepareForm(type: string, item?: any): void {
     this.form = this.fb.group({});
     this.formFields = [];
-  
-    switch(type) {
+
+    switch (type) {
       case 'curso':
         this.formFields = [
           { name: 'titulo', label: 'Título', type: 'text', placeholder: 'Título del curso', required: true },
@@ -128,8 +136,17 @@ export class AdminDashboardComponent implements OnInit{
           { name: 'es_gratuito', label: 'Gratuito', type: 'checkbox', placeholder: '', required: false }
         ];
         break;
-    }  
-  
+      case 'estudiante':
+        this.formFields = [
+          { name: 'id', label: 'ID', type: 'hidden', required: true }, // Campo oculto para el ID
+          { name: 'nombre', label: 'Nombre', type: 'text', placeholder: 'Nombre del estudiante', required: true },
+          { name: 'apellido', label: 'Apellido', type: 'text', placeholder: 'Apellido del estudiante', required: true },
+          { name: 'correo', label: 'Correo', type: 'email', placeholder: 'Correo electrónico', required: true },
+          { name: 'plan', label: 'Plan', type: 'text', placeholder: 'Plan del estudiante', required: true }
+        ];
+        break;
+    }
+
     this.formFields.forEach(field => {
       const validators = field.required ? [Validators.required] : [];
       this.form.addControl(field.name, this.fb.control(item ? item[field.name] : '', validators));
@@ -148,28 +165,17 @@ export class AdminDashboardComponent implements OnInit{
   submitForm(): void {
     if (this.form.valid) {
       const formData = this.form.value;
-      
-      // Crear FormData para manejar archivos si es necesario
-      const courseData = new FormData();
-      
-      // Agregar todos los campos al FormData
-      Object.keys(formData).forEach(key => {
-        courseData.append(key, formData[key]);
-      });
 
-      if (this.currentCourseId) {
-        // Lógica para actualizar curso (necesitarías implementar updateCourse en el servicio)
-        // this.coursesService.updateCourse(this.currentCourseId, courseData).subscribe(...)
-      } else {
-        // Crear nuevo curso
-        this.coursesService.createCourse(courseData).subscribe({
+      if (this.currentItemType === 'estudiante') {
+        // Lógica para actualizar estudiante
+        this.usersService.updateUser(formData.id, formData).subscribe({
           next: (response) => {
-            console.log('Curso creado:', response);
-            this.loadCourses(); // Recargar la lista
+            console.log('Estudiante actualizado:', response);
+            this.loadEstudiantes(); // Recargar la lista de estudiantes
             this.closeModal();
           },
           error: (err) => {
-            console.error('Error al crear curso:', err);
+            console.error('Error al actualizar estudiante:', err);
           }
         });
       }
@@ -193,6 +199,17 @@ export class AdminDashboardComponent implements OnInit{
           error: (err) => {
             console.error('Error al eliminar curso:', err);
             // Puedes mostrar un mensaje de error al usuario aquí
+          }
+        });
+      } else if (type === 'estudiante') {
+        this.usersService.deleteUser(id).subscribe({
+          next: () => {
+            // Eliminar el estudiante del array local para actualizar la vista sin recargar
+            this.estudiantes = this.estudiantes.filter(estudiante => estudiante.id !== id);
+            console.log('Estudiante eliminado con éxito');
+          },
+          error: (err) => {
+            console.error('Error al eliminar estudiante:', err);
           }
         });
       }

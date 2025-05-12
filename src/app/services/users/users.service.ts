@@ -29,21 +29,15 @@ export class UsersService {
   }
 
   updateUser(id: number, data: any): Observable<any> {
-    // No agregamos Content-Type cuando es FormData porque el navegador lo hace automáticamente
     const headers = this.getHeaders();
-    
-    // Logging para debug
-    console.log('Headers enviados:', headers);
-    if (data instanceof FormData) {
-      console.log('Enviando como FormData');
-      // Verificar si rolId está en el FormData
-      console.log('rolId en FormData:', data.get('rolId'));
-    }
-    
     return this.http.put(`${this.apiUrl}/${id}`, data, { headers });
   }
   
   deleteUser(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
+  }
+
+  getUsersByRole(roleId: number): Observable<{ users: user[] }> {
+    return this.http.get<{ users: user[] }>(`${this.apiUrl}?rol_id=${roleId}`, { headers: this.getHeaders() });
   }
 }
